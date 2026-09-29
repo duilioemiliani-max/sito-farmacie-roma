@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Archivio richieste · Farmacie Roma</title>
+<meta name="description" content="Area riservata">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="assets/img/logo-gruppo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<header><div class="wrap"><a class="brand" href="index.html"><img src="assets/img/logo-gruppo.png" alt="" width="40" height="40">Farmacie Roma</a><button type="button" class="btnl" id="out" hidden>Esci</button></div></header>
+<main id="top" tabindex="-1">
+<section><div class="wrap">
+<h1 class="ph">Archivio richieste</h1>
+<p class="intro" id="nocfg" hidden>L'archivio non è ancora collegato. Compila <b>assets/config.js</b> come indicato nel file LEGGIMI.md.</p>
+<div class="ask" id="login" style="max-width:440px">
+  <h2>Accesso riservato al personale</h2>
+  <form id="lf"><label for="em">Email</label><input type="email" id="em" autocomplete="username" required>
+  <label for="pw">Password</label><input type="password" id="pw" autocomplete="current-password" required>
+  <p class="note" id="lerr" role="alert" style="color:#b4432f;font-weight:600"></p>
+  <button class="btn" type="submit" style="background:var(--brand);color:var(--brand-ink);margin-top:12px">Entra</button></form>
+</div>
+<div id="app" hidden>
+  <div class="filters" id="tabs" role="group" aria-label="Sede"></div>
+  <div class="filters" id="stf" role="group" aria-label="Stato"></div>
+  <div class="tools"><input type="search" id="q" placeholder="Cerca nome, telefono, servizio…" aria-label="Cerca"><button type="button" class="btnl" id="csv" style="background:var(--brand);color:var(--brand-ink)">Scarica CSV</button><span class="note" id="upd"></span></div>
+  <div id="list" aria-live="polite"></div>
+</div>
+</div></section>
+</main>
+
+
+<script src="assets/config.js"></script>
+<script src="assets/archivio.js"></script>
+</body>
+</html>
