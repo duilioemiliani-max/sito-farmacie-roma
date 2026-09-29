@@ -197,3 +197,9 @@ a.chip.logo{text-decoration:none;color:inherit;transition:transform .15s,box-sha
 a.chip.logo:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.38)}
 a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){a.chip.logo{transition:none}a.chip.logo:hover{transform:none}}
+
+/* pulsante "invia senza WhatsApp" */
+.direct{margin-top:10px}
+.btn2{width:100%;padding:11px 16px;border:1.5px dashed var(--brand);border-radius:12px;background:transparent;color:var(--brand);font:600 15.5px Figtree,sans-serif;cursor:pointer}
+.btn2:disabled{opacity:.6;cursor:wait}
+.directMsg{margin:8px 0 0}.directMsg:empty{display:none}.directMsg.ok{color:var(--brand);font-weight:600}

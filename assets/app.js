@@ -120,32 +120,63 @@
   if(ak)ak.addEventListener('click',function(){setTimeout(function(){document.getElementById('fab').click()},0)});
 })();
 
-/* Archivio richieste: registra le richieste inviate (solo se config.js e' compilato) */
+/* Archivio richieste: registra le richieste inviate, e permette di inviarle
+   anche senza WhatsApp, direttamente dal sito (solo se config.js e' compilato) */
 (function(){
   var C=window.FR_CONFIG||{},U=(C.SUPABASE_URL||'').replace(/\/$/,''),K=C.SUPABASE_ANON_KEY||'';
   if(!U||!K)return;
   ['hpriv','dpriv'].forEach(function(i){var e=document.getElementById(i);if(e)e.hidden=false});
   var SEDE={'Emiliani':'emiliani','San Luca':'sanluca','Strampelli':'strampelli'},last='',lt=0;
   function v(i,n){var e=document.getElementById(i);return e?e.value.trim().slice(0,n):''}
+  function post(p){
+    return fetch(U+'/rest/v1/fr_richieste',{method:'POST',
+      headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify(p)});
+  }
   function send(p){
     var s=JSON.stringify(p);if(s===last&&Date.now()-lt<60000)return;last=s;lt=Date.now();
-    try{fetch(U+'/rest/v1/fr_richieste',{method:'POST',keepalive:true,
-      headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json',Prefer:'return=minimal'},body:s}).catch(function(){})}catch(e){}}
-  document.addEventListener('click',function(e){
-    var a=e.target.closest('#dgo,#go');if(!a)return;
-    if(a.id==='dgo'){
-      if(v('website',50))return;
+    try{post(p).catch(function(){})}catch(e){}
+  }
+  function dataFor(dialog){
+    if(dialog){
       var f=document.querySelector('input[name=df]:checked'),mo=document.querySelector('input[name=dm2]:checked'),
           fs=document.querySelector('input[name=dh]:checked'),wh=document.getElementById('when').hidden;
-      send({sede:SEDE[f.value.split('|')[1]],servizio:document.getElementById('dt').textContent.slice(0,120),
+      return {sede:SEDE[f.value.split('|')[1]],servizio:document.getElementById('dt').textContent.slice(0,120),
         modalita:mo?mo.value.slice(0,60):null,giorno:(!wh&&v('dd',10))||null,fascia:(!wh&&fs&&fs.value)||null,
-        nome:v('dn',100)||null,telefono:v('dp',30)||null,note:v('dm',500)||null});
-    }else{
-      var f2=document.querySelector('input[name=f]:checked'),s2=document.querySelector('input[name=s]:checked'),
-          l=document.querySelector('label[for='+s2.id+']');
-      send({sede:SEDE[f2.value.split('|')[1]],servizio:(l?l.textContent:'Richiesta').slice(0,120),note:v('det',500)||null});
+        nome:v('dn',100)||null,telefono:v('dp',30)||null,note:v('dm',500)||null};
     }
+    var f2=document.querySelector('input[name=f]:checked'),s2=document.querySelector('input[name=s]:checked'),
+        l=document.querySelector('label[for='+s2.id+']');
+    return {sede:SEDE[f2.value.split('|')[1]],servizio:(l?l.textContent:'Richiesta').slice(0,120),note:v('det',500)||null};
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('#dgo,#go');if(!a)return;
+    if(v('website',50))return;
+    send(dataFor(a.id==='dgo'));
   });
+
+  /* Pulsante "Invia senza WhatsApp": stesso invio, ma senza aprire nulla */
+  function mkDirect(after,dialog){
+    if(!after)return;
+    var wrap=document.createElement('div');wrap.className='direct';
+    var b=document.createElement('button');b.type='button';b.className='btn2';b.textContent='Invia senza aprire WhatsApp';
+    var msg=document.createElement('p');msg.className='note directMsg';msg.setAttribute('aria-live','polite');
+    wrap.appendChild(b);wrap.appendChild(msg);
+    after.insertAdjacentElement('afterend',wrap);
+    b.addEventListener('click',function(){
+      if(v('website',50))return;
+      b.disabled=true;msg.textContent='Invio in corso…';
+      post(dataFor(dialog)).then(function(r){
+        if(!r.ok)throw 0;
+        msg.textContent='Richiesta inviata alla farmacia. Ti contatteremo ai recapiti che hai lasciato.';
+        msg.classList.add('ok');
+      }).catch(function(){
+        b.disabled=false;msg.textContent='Non sono riuscito a inviarla: riprova, oppure usa WhatsApp qui sopra.';
+      });
+    });
+  }
+  mkDirect(document.getElementById('go'),false);
+  mkDirect(document.getElementById('dgo'),true);
 })();
 
 /* Voto Google (valori in config.js) */
