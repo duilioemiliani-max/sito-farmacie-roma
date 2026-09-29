@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti - Farmacie Roma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0a1a1a 0%, #0f2f2f 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #1abc9c;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: #1abc9c;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #1abc9c;
+        }
+
+        .form-wrapper {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(26, 188, 156, 0.2);
+            border-radius: 12px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1abc9c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #1abc9c;
+            background: rgba(26, 188, 156, 0.1);
+            box-shadow: 0 0 10px rgba(26, 188, 156, 0.2);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: rgba(224, 224, 224, 0.5);
+        }
+
+        select option {
+            background: #0a1a1a;
+            color: #e0e0e0;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .form-wrapper {
+                padding: 25px;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(26, 188, 156, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .info-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(26, 188, 156, 0.2);
+        }
+
+        .info-section h2 {
+            color: #1abc9c;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+
+        .pharmacy-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .pharmacy-card {
+            background: rgba(26, 188, 156, 0.05);
+            border: 1px solid rgba(26, 188, 156, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .pharmacy-card:hover {
+            border-color: #1abc9c;
+            background: rgba(26, 188, 156, 0.1);
+        }
+
+        .pharmacy-card h3 {
+            color: #1abc9c;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .pharmacy-card p {
+            font-size: 13px;
+            line-height: 1.6;
+            color: rgba(224, 224, 224, 0.8);
+            margin-bottom: 5px;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(26, 188, 156, 0.2);
+            border: 1px solid #1abc9c;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            color: #1abc9c;
+            text-align: center;
+        }
+
+        .error-message {
+            display: none;
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            color: #e74c3c;
+            text-align: center;
+        }
+
+        .contact-method-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #e0e0e0;
+            font-size: 14px;
+            padding: 10px 15px;
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s ease;
+        }
+
+        .radio-label:hover {
+            background: rgba(26, 188, 156, 0.1);
+            border-color: #1abc9c;
+        }
+
+        .radio-label input[type="radio"] {
+            cursor: pointer;
+            accent-color: #1abc9c;
+            width: 16px;
+            height: 16px;
+        }
+
+        .radio-label input[type="radio"]:checked + span {
+            color: #1abc9c;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">💊</div>
+            <h1>Contattaci</h1>
+        </header>
+
+        <div class="form-wrapper">
+            <div class="success-message" id="successMessage">
+                ✓ Grazie! Il tuo messaggio è stato inviato con successo. Ti contatteremo al più presto.
+            </div>
+            <div class="error-message" id="errorMessage">
+                ✗ Si è verificato un errore. Per favore riprova.
+            </div>
+
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5">
+                <input type="hidden" name="from_name" value="Farmacie Roma - Modulo Contatti">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" placeholder="Il tuo nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pharmacy">Farmacia</label>
+                        <select id="pharmacy" name="pharmacy" required>
+                            <option value="">Seleziona una farmacia</option>
+                            <option value="emiliani">Farmacia Emiliani</option>
+                            <option value="sanluca">Farmacia San Luca</option>
+                            <option value="strampelli">Farmacia Strampelli</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Come vuoi essere contattato?</label>
+                    <div class="contact-method-group">
+                        <label class="radio-label">
+                            <input type="radio" name="contact_method" value="email" checked>
+                            <span>📧 Via Email</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="contact_method" value="whatsapp">
+                            <span>💬 Via WhatsApp</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="emailGroup">
+                    <label for="email">La tua Email</label>
+                    <input type="email" id="email" name="email" placeholder="la.tua.email@gmail.com" required>
+                </div>
+
+                <div class="form-group" id="whatsappGroup" style="display: none;">
+                    <label for="whatsapp">Il tuo numero WhatsApp</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="+39 333 123 4567">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Messaggio</label>
+                    <textarea id="message" name="message" placeholder="Scrivi il tuo messaggio..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Invia Messaggio</button>
+            </form>
+        </div>
+
+        <div class="info-section">
+            <h2>Le Nostre Farmacie</h2>
+            <div class="pharmacy-info">
+                <div class="pharmacy-card">
+                    <h3>Farmacia Emiliani</h3>
+                    <p>📍 Via Cantiano, 62/A - Roma</p>
+                    <p>📞 06 220 3046</p>
+                    <p>🕐 Orari: Lun-Ven 8:30-20:00 | Sab 8:30-13:00</p>
+                </div>
+                <div class="pharmacy-card">
+                    <h3>Farmacia San Luca</h3>
+                    <p>📍 Via di Acqua Bullicante, 70 - Roma</p>
+                    <p>📞 06 2440 0522</p>
+                    <p>🕐 Orari: Lun-Ven 8:30-20:00 | Sab 8:30-13:00</p>
+                </div>
+                <div class="pharmacy-card">
+                    <h3>Farmacia Strampelli</h3>
+                    <p>📍 Via di Santa Croce in Gerusalemme, 22A - Roma</p>
+                    <p>📞 06 702 8004</p>
+                    <p>🕐 Orari: Lun-Ven 8:30-20:00 | Sab 8:30-13:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const contactMethodRadios = document.querySelectorAll('input[name="contact_method"]');
+        const emailGroup = document.getElementById('emailGroup');
+        const whatsappGroup = document.getElementById('whatsappGroup');
+        const emailInput = document.getElementById('email');
+        const whatsappInput = document.getElementById('whatsapp');
+
+        // WhatsApp numbers per farmacia
+        const whatsappNumbers = {
+            'emiliani': '393331804161',      // 333 180 4161
+            'sanluca': '393890336019',        // 389 033 6019
+            'strampelli': '393403515536'      // 340 351 5536
+        };
+
+        // Toggle tra Email e WhatsApp
+        contactMethodRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'email') {
+                    emailGroup.style.display = 'block';
+                    whatsappGroup.style.display = 'none';
+                    emailInput.required = true;
+                    whatsappInput.required = false;
+                } else {
+                    emailGroup.style.display = 'none';
+                    whatsappGroup.style.display = 'block';
+                    emailInput.required = false;
+                    whatsappInput.required = false; // facoltativo per chi non ha WhatsApp
+                }
+            });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            const contactMethod = document.querySelector('input[name="contact_method"]:checked').value;
+            const name = document.getElementById('name').value;
+            const pharmacy = document.getElementById('pharmacy').value;
+            const message = document.getElementById('message').value;
+
+            if (contactMethod === 'whatsapp') {
+                // WhatsApp: apri chat diretta
+                const userPhone = document.getElementById('whatsapp').value;
+                const pharmacyNumber = whatsappNumbers[pharmacy];
+                
+                if (!pharmacyNumber) {
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+
+                // Formato messaggio per WhatsApp
+                const whatsappMessage = `Ciao, mi chiamo ${name}.\n\n${message}`;
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappUrl = `https://wa.me/${pharmacyNumber}?text=${encodedMessage}`;
+
+                // Apri WhatsApp
+                window.open(whatsappUrl, '_blank');
+
+                // Mostra messaggio di successo
+                successMessage.textContent = '✓ WhatsApp aperto! Scrivi il tuo messaggio e invialo.';
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+
+            } else {
+                // Email: invia via Web3Forms
+                const formData = new FormData(form);
+                // Assicurati che to_email sia settato correttamente
+                const emailMap = {
+                    'emiliani': 'staffemiliani@gmail.com',
+                    'sanluca': 'staff.sanluca@gmail.com',
+                    'strampelli': 'staff.strampelli@gmail.com'
+                };
+                formData.set('to_email', emailMap[pharmacy]);
+
+                try {
+                    const response = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        successMessage.textContent = '✓ Grazie! Il tuo messaggio è stato inviato con successo. Ti contatteremo al più presto.';
+                        successMessage.style.display = 'block';
+                        form.reset();
+                        
+                        // Reset view to email
+                        emailGroup.style.display = 'block';
+                        whatsappGroup.style.display = 'none';
+                        
+                        // Scroll al messaggio di successo
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Nascondi il messaggio dopo 5 secondi
+                        setTimeout(() => {
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        errorMessage.style.display = 'block';
+                    }
+                } catch (error) {
+                    errorMessage.style.display = 'block';
+                    console.error('Errore:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
