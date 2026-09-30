@@ -3,223 +3,65 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Le nostre farmacie · Farmacie Roma</title>
-<meta name="description" content="Indirizzi, orari e contatti delle farmacie Emiliani, San Luca e Strampelli a Roma.">
+<title>Farmacie Emiliani, San Luca e Strampelli · Roma</title>
+<meta name="description" content="Farmacie Emiliani, San Luca e Strampelli a Roma: invia la ricetta, prenota vaccini, Holter, analisi e servizi, scrivi su WhatsApp alla farmacia più vicina.">
 <link rel="icon" type="image/png" href="assets/img/logo-gruppo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<style>
-.contact-section {
-  background: rgba(26, 188, 156, 0.05);
-  border: 1px solid rgba(26, 188, 156, 0.2);
-  border-radius: 12px;
-  padding: 40px;
-  margin-top: 60px;
-}
 
-.contact-section h2 {
-  color: var(--c-teal, #1abc9c);
-  margin-bottom: 30px;
-  text-align: center;
-  font-size: 1.75rem;
-}
-
-.contact-form-wrapper {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--c-teal, #1abc9c);
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 15px;
-  border: 1px solid rgba(26, 188, 156, 0.3);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  color: inherit;
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition: all 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--c-teal, #1abc9c);
-  background: rgba(26, 188, 156, 0.1);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.contact-method-group {
-  display: flex;
-  gap: 15px;
-  margin-top: 8px;
-}
-
-.radio-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  padding: 10px 15px;
-  border: 1px solid rgba(26, 188, 156, 0.3);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.02);
-  transition: all 0.2s ease;
-  flex: 1;
-}
-
-.radio-label:hover {
-  background: rgba(26, 188, 156, 0.1);
-  border-color: var(--c-teal, #1abc9c);
-}
-
-.radio-label input[type="radio"] {
-  cursor: pointer;
-  accent-color: var(--c-teal, #1abc9c);
-}
-
-.success-msg, .error-msg {
-  padding: 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  text-align: center;
-  display: none;
-}
-
-.success-msg {
-  background: rgba(26, 188, 156, 0.2);
-  border: 1px solid var(--c-teal, #1abc9c);
-  color: var(--c-teal, #1abc9c);
-}
-
-.error-msg {
-  background: rgba(231, 76, 60, 0.2);
-  border: 1px solid #e74c3c;
-  color: #e74c3c;
-}
-
-#emailGroup { display: block; }
-#whatsappGroup { display: none; }
-</style>
-<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Pharmacy", "name": "Farmacia Emiliani", "telephone": "+39062203046", "address": {"@type": "PostalAddress", "streetAddress": "Via Cantiano, 62/A", "postalCode": "00132", "addressLocality": "Roma", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.9130723, "longitude": 12.7291002}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:30", "closes": "20:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:30", "closes": "13:00"}], "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ", "sameAs": ["https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ"]}, {"@context": "https://schema.org", "@type": "Pharmacy", "name": "Farmacia San Luca", "telephone": "+390624400522", "address": {"@type": "PostalAddress", "streetAddress": "Via di Acqua Bullicante, 70", "postalCode": "00177", "addressLocality": "Roma", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.8836752, "longitude": 12.5434803}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:30", "closes": "20:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:30", "closes": "13:00"}], "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJL9sEBT1iLxMRGhrkAy4iJFs"}, {"@context": "https://schema.org", "@type": "Pharmacy", "name": "Farmacia Strampelli", "telephone": "+39067028004", "address": {"@type": "PostalAddress", "streetAddress": "Via di Santa Croce in Gerusalemme, 22A", "postalCode": "00185", "addressLocality": "Roma", "addressCountry": "IT"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.8895619, "longitude": 12.5137454}, "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:30", "closes": "20:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:30", "closes": "13:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "16:00", "closes": "19:30"}], "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJG0-y5ZNhLxMRQLBoApzZKh0"}]</script>
 </head>
 <body>
 <header><div class="wrap">
   <a class="brand" href="index.html"><img src="assets/img/logo-gruppo.png" alt="" width="40" height="40">Farmacie Roma</a>
   <button type="button" class="navbtn" id="navbtn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <nav id="nav" aria-label="Principale"><a href="index.html">Home</a><a href="servizi.html">Servizi</a><a href="convenzioni.html">Convenzioni</a><a href="farmacie.html" aria-current="page">Farmacie</a></nav>
+  <nav id="nav" aria-label="Principale"><a href="index.html" aria-current="page">Home</a><a href="servizi.html">Servizi</a><a href="convenzioni.html">Convenzioni</a><a href="farmacie.html">Farmacie</a></nav>
 </div></header>
 <main id="top" tabindex="-1">
-<section id="farmacie"><div class="wrap">
-  <h1 class="ph">Le nostre farmacie</h1>
-  <p class="intro">Tre sedi a Roma: indirizzo, orari e contatti di ognuna.</p>
-  <div class="pharm">
-    <article class="card" style="--c:var(--emiliani)"><div class="cimg"><img src="assets/img/foto-emiliani.jpg" alt="" loading="lazy"><img class="clogo" src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"></div><h3><a class="cardlink" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">Farmacia Emiliani<span class="sr"> - apri la scheda su Google</span></a></h3><p class="st" data-k="emiliani"></p>
-      <address>Via Cantiano, 62/A<br>00132 Roma · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Farmacia%20Emiliani&amp;destination_place_id=ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">Indicazioni</a></address>
-      <ul class="hrs"><li>Lunedì–venerdì 8:30–20:00</li><li>Sabato 8:30–13:00</li><li>Domenica chiusa</li></ul>
-      <p class="nums">WhatsApp 333 180 4161</p>
-      <p class="gr-line"><a data-gr class="gr" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener"></a></p>
-      <p class="glink"><a href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">Vedi su Google Maps</a> · <a href="https://search.google.com/local/writereview?placeid=ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">Lascia una recensione</a></p>
-      <div class="acts"><a class="btn" target="_blank" rel="noopener" href="https://wa.me/393331804161">Scrivi su WhatsApp</a><a class="tel" href="tel:+39062203046">Chiama 06 220 3046</a></div></article>
-    <article class="card" style="--c:var(--sanluca)"><div class="cimg"><img src="assets/img/foto-sanluca.jpg" alt="" loading="lazy"><img class="clogo" src="assets/img/logo-san-luca.jpg" alt="Logo Farmacia San Luca"></div><h3><a class="cardlink" href="https://www.google.com/maps/place/?q=place_id:ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener">Farmacia San Luca<span class="sr"> - apri la scheda su Google</span></a></h3><p class="st" data-k="sanluca"></p>
-      <address>Via di Acqua Bullicante, 70<br>00177 Roma · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Farmacia%20San%20Luca&amp;destination_place_id=ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener">Indicazioni</a></address>
-      <ul class="hrs"><li>Lunedì–venerdì 8:30–20:00</li><li>Sabato 8:30–13:00</li><li>Domenica chiusa</li></ul>
-      <p class="nums">WhatsApp 389 033 6019</p>
-      <p class="glink"><a href="https://www.google.com/maps/place/?q=place_id:ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener">Vedi su Google Maps</a> · <a href="https://search.google.com/local/writereview?placeid=ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener">Lascia una recensione</a></p>
-      <div class="acts"><a class="btn" target="_blank" rel="noopener" href="https://wa.me/393890336019">Scrivi su WhatsApp</a><a class="tel" href="tel:+390624400522">Chiama 06 2440 0522</a></div></article>
-    <article class="card" style="--c:var(--strampelli)"><div class="cimg"><img src="assets/img/foto-strampelli.jpg" alt="" loading="lazy"><img class="clogo" src="assets/img/logo-strampelli.jpg" alt="Logo Farmacia Strampelli"></div><h3><a class="cardlink" href="https://www.google.com/maps/place/?q=place_id:ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener">Farmacia Strampelli<span class="sr"> - apri la scheda su Google</span></a></h3><p class="st" data-k="strampelli"></p>
-      <address>Via di Santa Croce in Gerusalemme, 22A<br>00185 Roma · <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Farmacia%20Strampelli&amp;destination_place_id=ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener">Indicazioni</a></address>
-      <ul class="hrs"><li>Lunedì–venerdì 8:30–20:00</li><li>Sabato 8:30–13:00 e 16:00–19:30</li><li>Domenica chiusa</li></ul>
-      <p class="nums">WhatsApp 340 351 5536</p>
-      <p class="glink"><a href="https://www.google.com/maps/place/?q=place_id:ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener">Vedi su Google Maps</a> · <a href="https://search.google.com/local/writereview?placeid=ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener">Lascia una recensione</a></p>
-      <div class="acts"><a class="btn" target="_blank" rel="noopener" href="https://wa.me/393403515536">Scrivi su WhatsApp</a><a class="tel" href="tel:+39067028004">Chiama 06 702 8004</a></div></article>
+<div class="hero"><div class="wrap hero-grid">
+  <div>
+    <h1>Tre farmacie a Roma. Scrivi a quella che ti è più comoda.</h1>
+    <p class="lead">Invia una ricetta, prenota un servizio o chiedi un prodotto: scegli prima cosa ti serve, poi la farmacia.</p>
+    <div class="trio">
+      <a class="chip logo l-emiliani" style="--c:var(--emiliani)" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener"><span class="sr">Farmacia Emiliani - apri la scheda su Google</span></a>
+      <a class="chip logo l-sanluca" style="--c:var(--sanluca)" href="https://www.google.com/maps/place/?q=place_id:ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener"><span class="sr">Farmacia San Luca - apri la scheda su Google</span></a>
+      <a class="chip logo l-strampelli" style="--c:var(--strampelli)" href="https://www.google.com/maps/place/?q=place_id:ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener"><span class="sr">Farmacia Strampelli - apri la scheda su Google</span></a>
+    </div>
   </div>
-</div></section>
 
-<!-- NUOVA SEZIONE: MODULO DI CONTATTO -->
-<section id="contact" class="contact-section"><div class="wrap">
-  <h2>Contattaci via Email</h2>
-  <div class="contact-form-wrapper">
-    <div class="success-msg" id="successMsg">✓ Grazie! Il tuo messaggio è stato inviato con successo.</div>
-    <div class="error-msg" id="errorMsg">✗ Si è verificato un errore. Per favore riprova.</div>
-    
-    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5">
-      <input type="hidden" name="from_name" value="Farmacie Roma">
-      
-      <div class="form-group">
-        <label for="contactName">Nome</label>
-        <input type="text" id="contactName" name="name" placeholder="Il tuo nome" required>
+  <div class="ask" id="richiesta">
+    <h2>Di cosa hai bisogno?</h2>
+    <p class="sub">Ti apriamo WhatsApp con il messaggio già scritto.</p>
+    <fieldset><legend>1. Scegli il servizio</legend>
+      <div class="opts" id="svc">
+        <input type="radio" name="s" id="s1" value="Vorrei inviare una ricetta" checked><label for="s1">Invia una ricetta</label>
+        <input type="radio" name="s" id="s2" value="Vorrei prenotare un servizio"><label for="s2">Prenota un servizio</label>
+        <input type="radio" name="s" id="s3" value="Vorrei chiedere la disponibilità di un prodotto"><label for="s3">Chiedi un prodotto</label>
+        <input type="radio" name="s" id="s4" value="Vorrei un'informazione"><label for="s4">Altra domanda</label>
       </div>
-      
-      <div class="form-group">
-        <label for="contactPharmacy">Farmacia</label>
-        <select id="contactPharmacy" name="pharmacy" required>
-          <option value="">Seleziona una farmacia</option>
-          <option value="emiliani">Farmacia Emiliani</option>
-          <option value="sanluca">Farmacia San Luca</option>
-          <option value="strampelli">Farmacia Strampelli</option>
-        </select>
+    </fieldset>
+    <fieldset><legend>2. Scegli la farmacia</legend>
+      <div class="opts sede" id="sede">
+        <input type="radio" name="f" id="f1" value="393331804161|Emiliani" checked><label for="f1" style="--c:var(--emiliani)">Emiliani<span class="ad">Via Cantiano, 62/A · Corcolle</span></label>
+        <input type="radio" name="f" id="f2" value="393890336019|San Luca"><label for="f2" style="--c:var(--sanluca)">San Luca<span class="ad">Via di Acqua Bullicante, 70 · Torpignattara</span></label>
+        <input type="radio" name="f" id="f3" value="393403515536|Strampelli"><label for="f3" style="--c:var(--strampelli)">Strampelli<span class="ad">Via S. Croce in Gerusalemme, 22A · San Giovanni</span></label>
       </div>
-      
-      <div class="form-group">
-        <label>Come vuoi essere contattato?</label>
-        <div class="contact-method-group">
-          <label class="radio-label">
-            <input type="radio" name="contact_method" value="email" checked>
-            <span>📧 Email</span>
-          </label>
-          <label class="radio-label">
-            <input type="radio" name="contact_method" value="whatsapp">
-            <span>💬 WhatsApp</span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="form-group" id="emailGroup">
-        <label for="contactEmail">La tua Email</label>
-        <input type="email" id="contactEmail" name="email" placeholder="tua.email@gmail.com" required>
-      </div>
-      
-      <div class="form-group" id="whatsappGroup">
-        <label for="contactWhatsapp">Il tuo numero WhatsApp</label>
-        <input type="tel" id="contactWhatsapp" name="whatsapp" placeholder="+39 333 123 4567">
-      </div>
-      
-      <div class="form-group">
-        <label for="contactMessage">Messaggio</label>
-        <textarea id="contactMessage" name="message" placeholder="Scrivi il tuo messaggio..." required></textarea>
-      </div>
-      
-      <button type="submit" class="btn" style="width: 100%;">Invia Messaggio</button>
-    </form>
+      <button type="button" class="geob" id="geob">Trova la più vicina a me</button><p class="geo" id="geoS" aria-live="polite"></p>
+    </fieldset>
+    <fieldset><legend><label for="det" style="font-weight:600">3. Aggiungi i dettagli (facoltativo)</label></legend>
+      <textarea id="det" placeholder="Es. nome del farmaco, giorno preferito…"></textarea>
+    </fieldset>
+    <a class="btn" id="go" href="#" target="_blank" rel="noopener">Scrivi su WhatsApp</a>
+    <p class="note">Non inviare dati sanitari sensibili se non richiesti dal farmacista.</p>
+    <p class="note" id="hpriv" hidden>La richiesta viene registrata dalla farmacia scelta per gestirla. <a href="privacy.html">Informativa privacy</a></p>
   </div>
-</div></section>
-<!-- FINE SEZIONE CONTATTI -->
-
+</div></div>
+<section><div class="wrap"><h2>Servizi in evidenza</h2><p class="intro">Tocca un servizio per prenotarlo o richiederlo.</p>
+<div class="services" id="hl"><article class="svc" data-cat="r" data-book="0" data-phrase="inviare una ricetta" data-title="Invia una ricetta" data-ml="" data-modes=""><img src="assets/img/invia-una-ricetta.jpg" alt="" loading="lazy"><div><h3>Invia una ricetta</h3><p>Mandaci la ricetta prima di passare: la trovi pronta al ritiro.</p><div class="bds"></div><button type="button" class="svc-btn">Invia ricetta</button></div></article><article class="svc" data-cat="r" data-book="0" data-phrase="chiedere la disponibilità di un prodotto" data-title="Prodotti e consigli" data-ml="" data-modes=""><img src="assets/img/prodotti-e-consigli.jpg" alt="" loading="lazy"><div><h3>Prodotti e consigli</h3><p>Chiedi se un prodotto è disponibile e fatti consigliare.</p><div class="bds"></div><button type="button" class="svc-btn">Chiedi un prodotto</button></div></article><article class="svc" data-cat="v" data-book="1" data-phrase="prenotare il vaccino antinfluenzale" data-title="Vaccino antinfluenzale" data-ml="Come vuoi farlo?" data-modes="In convenzione ASL|A pagamento"><img src="assets/img/vaccino-antinfluenzale.jpg" alt="" loading="lazy"><div><h3>Vaccino antinfluenzale</h3><p>Prenota la vaccinazione stagionale.</p><div class="bds"><span class="bd">Convenzione ASL</span><span class="bd">A pagamento</span></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="c" data-book="1" data-phrase="prenotare la misurazione della pressione" data-title="Misurazione della pressione" data-ml="" data-modes=""><img src="assets/img/misurazione-della-pressione.jpg" alt="" loading="lazy"><div><h3>Misurazione della pressione</h3><p>Un controllo rapido, senza appuntamento lungo.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="a" data-book="1" data-phrase="prenotare il metabolic check (colesterolo, trigliceridi, HDL e LDL)" data-title="Metabolic check" data-ml="" data-modes=""><img src="assets/img/metabolic-check.jpg" alt="" loading="lazy"><div><h3>Metabolic check</h3><p>Colesterolo totale, trigliceridi, HDL e LDL.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="c" data-book="1" data-phrase="prenotare la foratura dei lobi" data-title="Foratura lobi" data-ml="" data-modes=""><img src="assets/img/foratura-lobi.jpg" alt="" loading="lazy"><div><h3>Foratura lobi</h3><p>Foratura dei lobi con il farmacista.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article></div><a class="more" href="servizi.html">Vedi tutti i servizi</a></div></section>
+<section><div class="wrap"><div class="band"><div><h2>Convenzioni ASL e servizi mutuabili</h2><p>Vaccini, Holter e ricerca del sangue occulto nelle feci: scopri cosa è in convenzione.</p></div><a class="btnl" href="convenzioni.html">Vedi le convenzioni</a></div></div></section>
+<section><div class="wrap"><h2>Le nostre sedi</h2><p class="intro">Tre farmacie a Roma, con gli stessi servizi.</p><div class="mini-grid"><a class="mini" href="farmacie.html" style="--c:var(--emiliani)"><img class="ml" src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><span class="mt"><b>Farmacia Emiliani</b><span class="st" data-k="emiliani"></span><span>Via Cantiano, 62/A</span></span></a><a class="mini" href="farmacie.html" style="--c:var(--sanluca)"><img class="ml" src="assets/img/logo-san-luca.jpg" alt="Logo Farmacia San Luca"><span class="mt"><b>Farmacia San Luca</b><span class="st" data-k="sanluca"></span><span>Via di Acqua Bullicante, 70</span></span></a><a class="mini" href="farmacie.html" style="--c:var(--strampelli)"><img class="ml" src="assets/img/logo-strampelli.jpg" alt="Logo Farmacia Strampelli"><span class="mt"><b>Farmacia Strampelli</b><span class="st" data-k="strampelli"></span><span>Via di Santa Croce in Gerusalemme, 22A</span></span></a></div><p class="gr-line">Farmacia Emiliani su Google: <a data-gr class="gr" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener"></a></p>
+<a class="more" href="farmacie.html">Orari e contatti delle sedi</a></div></section>
 </main>
 <footer><div class="wrap"><strong>Gruppo di farmacie a Roma</strong><div class="flogos"><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><img src="assets/img/logo-san-luca.jpg" alt="Logo Farmacia San Luca"><img src="assets/img/logo-strampelli.jpg" alt="Logo Farmacia Strampelli"></div><address>Farmacia Emiliani · Via Cantiano, 62/A, 00132 Roma · 06 220 3046</address><address>Farmacia San Luca · Via di Acqua Bullicante, 70, 00177 Roma · 06 2440 0522</address><address>Farmacia Strampelli · Via di Santa Croce in Gerusalemme, 22A, 00185 Roma · 06 702 8004</address><address>Orari indicativi: possono variare nei giorni festivi.</address><address>Trovaci su Google: <a href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">scheda di Farmacia Emiliani</a> <span data-gr class="gr"></span> · <a href="https://search.google.com/local/writereview?placeid=ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">lascia una recensione</a></address><address><a href="privacy.html">Informativa privacy</a></address></div></footer>
 <dialog id="dlg" aria-labelledby="dt"><div class="dlg">
@@ -243,7 +85,8 @@
       </div></fieldset>
   </div>
   <fieldset><legend><label for="dn" style="font-weight:600">Nome e cognome (facoltativo)</label></legend><input type="text" id="dn" autocomplete="name"></fieldset>
-  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati (facoltativo)</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel"></fieldset>
+  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel" required></fieldset>
+  <fieldset><legend><label for="de" style="font-weight:600">Email per ricevere la risposta</label></legend><input type="email" id="de" autocomplete="email" required></fieldset>
   <fieldset><legend><label for="dm" style="font-weight:600">Note (facoltativo)</label></legend><textarea id="dm"></textarea></fieldset>
   <p class="note" id="dhint"></p>
   <div class="hp" aria-hidden="true"><label>Sito web <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
@@ -256,89 +99,5 @@
 </div>
 <script src="assets/config.js"></script>
 <script src="assets/app.js"></script>
-<script>
-// Gestione modulo contatti
-const contactForm = document.getElementById('contactForm');
-const successMsg = document.getElementById('successMsg');
-const errorMsg = document.getElementById('errorMsg');
-const methodRadios = document.querySelectorAll('input[name="contact_method"]');
-const emailGroup = document.getElementById('emailGroup');
-const whatsappGroup = document.getElementById('whatsappGroup');
-const emailInput = document.getElementById('contactEmail');
-const whatsappInput = document.getElementById('contactWhatsapp');
-const pharmacySelect = document.getElementById('contactPharmacy');
-
-const emailMap = {
-  'emiliani': 'staffemiliani@gmail.com',
-  'sanluca': 'staff.sanluca@gmail.com',
-  'strampelli': 'staff.strampelli@gmail.com'
-};
-
-const whatsappNumbers = {
-  'emiliani': '393331804161',
-  'sanluca': '393890336019',
-  'strampelli': '393403515536'
-};
-
-methodRadios.forEach(radio => {
-  radio.addEventListener('change', (e) => {
-    if (e.target.value === 'email') {
-      emailGroup.style.display = 'block';
-      whatsappGroup.style.display = 'none';
-      emailInput.required = true;
-      whatsappInput.required = false;
-    } else {
-      emailGroup.style.display = 'none';
-      whatsappGroup.style.display = 'block';
-      emailInput.required = false;
-      whatsappInput.required = false;
-    }
-  });
-});
-
-contactForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  successMsg.style.display = 'none';
-  errorMsg.style.display = 'none';
-
-  const method = document.querySelector('input[name="contact_method"]:checked').value;
-  const name = document.getElementById('contactName').value;
-  const pharmacy = pharmacySelect.value;
-  const message = document.getElementById('contactMessage').value;
-
-  if (method === 'whatsapp') {
-    const userPhone = whatsappInput.value;
-    const waNumber = whatsappNumbers[pharmacy];
-    const waMessage = `Ciao, mi chiamo ${name}.\n\n${message}`;
-    window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`, '_blank');
-    successMsg.textContent = '✓ WhatsApp aperto! Scrivi il tuo messaggio.';
-    successMsg.style.display = 'block';
-    setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-  } else {
-    const formData = new FormData(contactForm);
-    formData.set('to_email', emailMap[pharmacy]);
-    
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (response.ok) {
-        successMsg.style.display = 'block';
-        contactForm.reset();
-        emailGroup.style.display = 'block';
-        whatsappGroup.style.display = 'none';
-        successMsg.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    } catch (error) {
-      errorMsg.style.display = 'block';
-    }
-  }
-});
-</script>
 </body>
 </html>

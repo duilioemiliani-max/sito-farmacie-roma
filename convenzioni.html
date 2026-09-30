@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Convenzioni ASL · Farmacie Roma</title>
-<meta name="description" content="Servizi in convenzione ASL e mutuabili nelle farmacie Emiliani, San Luca e Strampelli a Roma: vaccini, Holter e sangue occulto nelle feci.">
+<title>Farmacie Emiliani, San Luca e Strampelli · Roma</title>
+<meta name="description" content="Farmacie Emiliani, San Luca e Strampelli a Roma: invia la ricetta, prenota vaccini, Holter, analisi e servizi, scrivi su WhatsApp alla farmacia più vicina.">
 <link rel="icon" type="image/png" href="assets/img/logo-gruppo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +16,52 @@
 <header><div class="wrap">
   <a class="brand" href="index.html"><img src="assets/img/logo-gruppo.png" alt="" width="40" height="40">Farmacie Roma</a>
   <button type="button" class="navbtn" id="navbtn" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <nav id="nav" aria-label="Principale"><a href="index.html">Home</a><a href="servizi.html">Servizi</a><a href="convenzioni.html" aria-current="page">Convenzioni</a><a href="farmacie.html">Farmacie</a></nav>
+  <nav id="nav" aria-label="Principale"><a href="index.html" aria-current="page">Home</a><a href="servizi.html">Servizi</a><a href="convenzioni.html">Convenzioni</a><a href="farmacie.html">Farmacie</a></nav>
 </div></header>
 <main id="top" tabindex="-1">
-<section><div class="wrap"><h1 class="ph">Convenzioni ASL e servizi mutuabili</h1>
-<p class="intro">Alcuni servizi si possono fare in convenzione con l'ASL o come prestazione mutuabile, altri a pagamento. Ecco il quadro.</p>
-<div class="tw"><table><thead><tr><th scope="col">Servizio</th><th scope="col">Con il Servizio Sanitario</th><th scope="col">A pagamento</th></tr></thead><tbody><tr><th scope="row">Vaccino antinfluenzale</th><td><span class="bd">Convenzione ASL</span></td><td>Sì</td></tr><tr><th scope="row">Vaccino HPV</th><td><span class="bd">Convenzione ASL</span></td><td>Sì</td></tr><tr><th scope="row">Vaccino antipneumococcico</th><td><span class="bd">Convenzione ASL</span></td><td>Sì</td></tr><tr><th scope="row">Holter cardiaco</th><td><span class="bd">Mutuabile</span></td><td>Sì</td></tr><tr><th scope="row">Holter pressorio</th><td><span class="bd">Mutuabile</span></td><td>Sì</td></tr><tr><th scope="row">Sangue occulto nelle feci</th><td><span class="bd">Convenzione ASL</span></td><td>—</td></tr></tbody></table></div>
-<p class="intro" style="margin-top:22px">Per sapere cosa serve e quanto costa, chiedi alla farmacia che preferisci.</p>
-<div class="rowb"><button type="button" class="btnl" id="askwa">Scrivi a una farmacia</button><a class="more" href="servizi.html" style="margin:0">Vedi tutti i servizi</a></div></div></section>
+<div class="hero"><div class="wrap hero-grid">
+  <div>
+    <h1>Tre farmacie a Roma. Scrivi a quella che ti è più comoda.</h1>
+    <p class="lead">Invia una ricetta, prenota un servizio o chiedi un prodotto: scegli prima cosa ti serve, poi la farmacia.</p>
+    <div class="trio">
+      <a class="chip logo l-emiliani" style="--c:var(--emiliani)" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener"><span class="sr">Farmacia Emiliani - apri la scheda su Google</span></a>
+      <a class="chip logo l-sanluca" style="--c:var(--sanluca)" href="https://www.google.com/maps/place/?q=place_id:ChIJL9sEBT1iLxMRGhrkAy4iJFs" target="_blank" rel="noopener"><span class="sr">Farmacia San Luca - apri la scheda su Google</span></a>
+      <a class="chip logo l-strampelli" style="--c:var(--strampelli)" href="https://www.google.com/maps/place/?q=place_id:ChIJG0-y5ZNhLxMRQLBoApzZKh0" target="_blank" rel="noopener"><span class="sr">Farmacia Strampelli - apri la scheda su Google</span></a>
+    </div>
+  </div>
+
+  <div class="ask" id="richiesta">
+    <h2>Di cosa hai bisogno?</h2>
+    <p class="sub">Ti apriamo WhatsApp con il messaggio già scritto.</p>
+    <fieldset><legend>1. Scegli il servizio</legend>
+      <div class="opts" id="svc">
+        <input type="radio" name="s" id="s1" value="Vorrei inviare una ricetta" checked><label for="s1">Invia una ricetta</label>
+        <input type="radio" name="s" id="s2" value="Vorrei prenotare un servizio"><label for="s2">Prenota un servizio</label>
+        <input type="radio" name="s" id="s3" value="Vorrei chiedere la disponibilità di un prodotto"><label for="s3">Chiedi un prodotto</label>
+        <input type="radio" name="s" id="s4" value="Vorrei un'informazione"><label for="s4">Altra domanda</label>
+      </div>
+    </fieldset>
+    <fieldset><legend>2. Scegli la farmacia</legend>
+      <div class="opts sede" id="sede">
+        <input type="radio" name="f" id="f1" value="393331804161|Emiliani" checked><label for="f1" style="--c:var(--emiliani)">Emiliani<span class="ad">Via Cantiano, 62/A · Corcolle</span></label>
+        <input type="radio" name="f" id="f2" value="393890336019|San Luca"><label for="f2" style="--c:var(--sanluca)">San Luca<span class="ad">Via di Acqua Bullicante, 70 · Torpignattara</span></label>
+        <input type="radio" name="f" id="f3" value="393403515536|Strampelli"><label for="f3" style="--c:var(--strampelli)">Strampelli<span class="ad">Via S. Croce in Gerusalemme, 22A · San Giovanni</span></label>
+      </div>
+      <button type="button" class="geob" id="geob">Trova la più vicina a me</button><p class="geo" id="geoS" aria-live="polite"></p>
+    </fieldset>
+    <fieldset><legend><label for="det" style="font-weight:600">3. Aggiungi i dettagli (facoltativo)</label></legend>
+      <textarea id="det" placeholder="Es. nome del farmaco, giorno preferito…"></textarea>
+    </fieldset>
+    <a class="btn" id="go" href="#" target="_blank" rel="noopener">Scrivi su WhatsApp</a>
+    <p class="note">Non inviare dati sanitari sensibili se non richiesti dal farmacista.</p>
+    <p class="note" id="hpriv" hidden>La richiesta viene registrata dalla farmacia scelta per gestirla. <a href="privacy.html">Informativa privacy</a></p>
+  </div>
+</div></div>
+<section><div class="wrap"><h2>Servizi in evidenza</h2><p class="intro">Tocca un servizio per prenotarlo o richiederlo.</p>
+<div class="services" id="hl"><article class="svc" data-cat="r" data-book="0" data-phrase="inviare una ricetta" data-title="Invia una ricetta" data-ml="" data-modes=""><img src="assets/img/invia-una-ricetta.jpg" alt="" loading="lazy"><div><h3>Invia una ricetta</h3><p>Mandaci la ricetta prima di passare: la trovi pronta al ritiro.</p><div class="bds"></div><button type="button" class="svc-btn">Invia ricetta</button></div></article><article class="svc" data-cat="r" data-book="0" data-phrase="chiedere la disponibilità di un prodotto" data-title="Prodotti e consigli" data-ml="" data-modes=""><img src="assets/img/prodotti-e-consigli.jpg" alt="" loading="lazy"><div><h3>Prodotti e consigli</h3><p>Chiedi se un prodotto è disponibile e fatti consigliare.</p><div class="bds"></div><button type="button" class="svc-btn">Chiedi un prodotto</button></div></article><article class="svc" data-cat="v" data-book="1" data-phrase="prenotare il vaccino antinfluenzale" data-title="Vaccino antinfluenzale" data-ml="Come vuoi farlo?" data-modes="In convenzione ASL|A pagamento"><img src="assets/img/vaccino-antinfluenzale.jpg" alt="" loading="lazy"><div><h3>Vaccino antinfluenzale</h3><p>Prenota la vaccinazione stagionale.</p><div class="bds"><span class="bd">Convenzione ASL</span><span class="bd">A pagamento</span></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="c" data-book="1" data-phrase="prenotare la misurazione della pressione" data-title="Misurazione della pressione" data-ml="" data-modes=""><img src="assets/img/misurazione-della-pressione.jpg" alt="" loading="lazy"><div><h3>Misurazione della pressione</h3><p>Un controllo rapido, senza appuntamento lungo.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="a" data-book="1" data-phrase="prenotare il metabolic check (colesterolo, trigliceridi, HDL e LDL)" data-title="Metabolic check" data-ml="" data-modes=""><img src="assets/img/metabolic-check.jpg" alt="" loading="lazy"><div><h3>Metabolic check</h3><p>Colesterolo totale, trigliceridi, HDL e LDL.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article><article class="svc" data-cat="c" data-book="1" data-phrase="prenotare la foratura dei lobi" data-title="Foratura lobi" data-ml="" data-modes=""><img src="assets/img/foratura-lobi.jpg" alt="" loading="lazy"><div><h3>Foratura lobi</h3><p>Foratura dei lobi con il farmacista.</p><div class="bds"></div><button type="button" class="svc-btn">Prenota</button></div></article></div><a class="more" href="servizi.html">Vedi tutti i servizi</a></div></section>
+<section><div class="wrap"><div class="band"><div><h2>Convenzioni ASL e servizi mutuabili</h2><p>Vaccini, Holter e ricerca del sangue occulto nelle feci: scopri cosa è in convenzione.</p></div><a class="btnl" href="convenzioni.html">Vedi le convenzioni</a></div></div></section>
+<section><div class="wrap"><h2>Le nostre sedi</h2><p class="intro">Tre farmacie a Roma, con gli stessi servizi.</p><div class="mini-grid"><a class="mini" href="farmacie.html" style="--c:var(--emiliani)"><img class="ml" src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><span class="mt"><b>Farmacia Emiliani</b><span class="st" data-k="emiliani"></span><span>Via Cantiano, 62/A</span></span></a><a class="mini" href="farmacie.html" style="--c:var(--sanluca)"><img class="ml" src="assets/img/logo-san-luca.jpg" alt="Logo Farmacia San Luca"><span class="mt"><b>Farmacia San Luca</b><span class="st" data-k="sanluca"></span><span>Via di Acqua Bullicante, 70</span></span></a><a class="mini" href="farmacie.html" style="--c:var(--strampelli)"><img class="ml" src="assets/img/logo-strampelli.jpg" alt="Logo Farmacia Strampelli"><span class="mt"><b>Farmacia Strampelli</b><span class="st" data-k="strampelli"></span><span>Via di Santa Croce in Gerusalemme, 22A</span></span></a></div><p class="gr-line">Farmacia Emiliani su Google: <a data-gr class="gr" href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener"></a></p>
+<a class="more" href="farmacie.html">Orari e contatti delle sedi</a></div></section>
 </main>
 <footer><div class="wrap"><strong>Gruppo di farmacie a Roma</strong><div class="flogos"><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><img src="assets/img/logo-san-luca.jpg" alt="Logo Farmacia San Luca"><img src="assets/img/logo-strampelli.jpg" alt="Logo Farmacia Strampelli"></div><address>Farmacia Emiliani · Via Cantiano, 62/A, 00132 Roma · 06 220 3046</address><address>Farmacia San Luca · Via di Acqua Bullicante, 70, 00177 Roma · 06 2440 0522</address><address>Farmacia Strampelli · Via di Santa Croce in Gerusalemme, 22A, 00185 Roma · 06 702 8004</address><address>Orari indicativi: possono variare nei giorni festivi.</address><address>Trovaci su Google: <a href="https://www.google.com/maps/place/?q=place_id:ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">scheda di Farmacia Emiliani</a> <span data-gr class="gr"></span> · <a href="https://search.google.com/local/writereview?placeid=ChIJH382Q7F-LxMRiJyVyYdh7GQ" target="_blank" rel="noopener">lascia una recensione</a></address><address><a href="privacy.html">Informativa privacy</a></address></div></footer>
 <dialog id="dlg" aria-labelledby="dt"><div class="dlg">
@@ -47,7 +85,8 @@
       </div></fieldset>
   </div>
   <fieldset><legend><label for="dn" style="font-weight:600">Nome e cognome (facoltativo)</label></legend><input type="text" id="dn" autocomplete="name"></fieldset>
-  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati (facoltativo)</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel"></fieldset>
+  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel" required></fieldset>
+  <fieldset><legend><label for="de" style="font-weight:600">Email per ricevere la risposta</label></legend><input type="email" id="de" autocomplete="email" required></fieldset>
   <fieldset><legend><label for="dm" style="font-weight:600">Note (facoltativo)</label></legend><textarea id="dm"></textarea></fieldset>
   <p class="note" id="dhint"></p>
   <div class="hp" aria-hidden="true"><label>Sito web <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>

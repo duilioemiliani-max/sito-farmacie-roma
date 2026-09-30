@@ -142,7 +142,7 @@
           fs=document.querySelector('input[name=dh]:checked'),wh=document.getElementById('when').hidden;
       return {sede:SEDE[f.value.split('|')[1]],servizio:document.getElementById('dt').textContent.slice(0,120),
         modalita:mo?mo.value.slice(0,60):null,giorno:(!wh&&v('dd',10))||null,fascia:(!wh&&fs&&fs.value)||null,
-        nome:v('dn',100)||null,telefono:v('dp',30)||null,note:v('dm',500)||null};
+        nome:v('dn',100)||null,telefono:v('dp',30)||null,email:v('de',100)||null,note:v('dm',500)||null};
     }
     var f2=document.querySelector('input[name=f]:checked'),s2=document.querySelector('input[name=s]:checked'),
         l=document.querySelector('label[for='+s2.id+']');
@@ -163,24 +163,27 @@
     after.insertAdjacentElement('afterend',wrap);
     b.addEventListener('click',function(){
       if(v('website',50))return;
-      b.disabled=true;msg.textContent='Invio in corso…';
       var data=dataFor(dialog);
+      if(!data.telefono){msg.textContent='Inserisci il telefono per essere ricontattato';return}
+      if(!data.email){msg.textContent='Inserisci un email valida';return}
+      b.disabled=true;msg.textContent='Invio in corso…';
       var emailMap={'emiliani':'staffemiliani@gmail.com','sanluca':'staff.sanluca@gmail.com','strampelli':'staff.strampelli@gmail.com'};
-      var messageText='Richiesta: '+data.servizio+(data.modalita?'\nModalità: '+data.modalita:'')+(data.giorno?'\nGiorno: '+data.giorno:'')+(data.fascia?'\nFascia: '+data.fascia:'')+(data.nome?'\nNome: '+data.nome:'')+(data.telefono?'\nTelefono: '+data.telefono:'')+(data.note?'\nNote: '+data.note:'');
+      var messageText='Richiesta: '+data.servizio+(data.modalita?'\nModalità: '+data.modalita:'')+(data.giorno?'\nGiorno: '+data.giorno:'')+(data.fascia?'\nFascia: '+data.fascia:'')+(data.nome?'\nNome: '+data.nome:'')+(data.telefono?'\nTelefono: '+data.telefono:'')+(data.email?'\nEmail: '+data.email:'')+(data.note?'\nNote: '+data.note:'');
       var fd=new FormData();
       fd.append('access_key','1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5');
       fd.append('from_name','Farmacie Roma - Sito');
+      fd.append('reply_to',data.email);
       fd.append('to_email',emailMap[data.sede]);
-      fd.append('subject','Nuova richiesta dal sito');
+      fd.append('subject','Nuova richiesta dal sito - '+data.servizio);
       fd.append('message',messageText);
       fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){
         if(!r.ok)throw 0;
         if(U&&K)post(data).catch(function(){});
-        msg.textContent='Richiesta inviata alla farmacia. Ti contatteremo ai recapiti che hai lasciato.';
+        msg.textContent='✓ Richiesta inviata! La farmacia ti contatterà ai recapiti che hai lasciato.';
         msg.classList.add('ok');
         b.disabled=false;
       }).catch(function(){
-        b.disabled=false;msg.textContent='Non sono riuscito a inviarla: riprova, oppure usa WhatsApp qui sopra.';
+        b.disabled=false;msg.textContent='Errore: riprova, oppure usa WhatsApp qui sopra.';
       });
     });
   }
