@@ -165,23 +165,24 @@
     function hint(){if(st&&!b.disabled&&!st.classList.contains('ok')&&!st.classList.contains('err'))st.textContent='Arriva alla Farmacia '+farm()+'. Oppure scrivi a: '+(EM[farm()]||'')}
     ['input','change','click'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target!==b){if(st&&ev!=='click'){st.classList.remove('ok','err')}setTimeout(hint,0)}})});
     hint();
+    function show(cls,t){st.className='note mailto-alt'+(cls?' '+cls:'');st.textContent=t;try{st.scrollIntoView({block:'nearest'})}catch(e){st.scrollIntoView(false)}}
     b.addEventListener('click',function(){
       if(v('website',50))return;
       var c=getContact();
-      if(!c.tel&&!c.email){st.className='note mailto-alt err';st.textContent='Inserisci il telefono o l\'email, così la farmacia può risponderti.';return}
-      if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){st.className='note mailto-alt err';st.textContent='L\'email non sembra corretta: controllala.';return}
+      if(!c.tel&&!c.email){show('err','Inserisci il telefono o l\'email, così la farmacia può risponderti.');var fi=document.getElementById(btnId==='dmail'?'dp':'hc');if(fi){fi.style.borderColor='#c0392b';fi.addEventListener('input',function(){fi.style.borderColor=''},{once:true})}return}
+      if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
       var fa=farm(),serv=getServ();
       var body={access_key:W3KEY,subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Roma',
         'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
       if(c.email)body.replyto=c.email;
-      b.disabled=true;st.className='note mailto-alt';st.textContent='Invio in corso…';
+      b.disabled=true;show('','Invio in corso…');
       fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
         .then(function(r){return r.json()}).then(function(j){
           if(!j||!j.success)throw 0;
-          st.className='note mailto-alt ok';st.textContent='✓ Richiesta inviata alla Farmacia '+fa+'. Ti ricontatteremo presto.';
+          show('ok','✓ Richiesta inviata alla Farmacia '+fa+'. Ti ricontatteremo presto.');
         }).catch(function(){
-          st.className='note mailto-alt err';st.textContent='Invio non riuscito. Riprova, oppure scrivi su WhatsApp o a '+(EM[fa]||'');
+          show('err','Invio non riuscito. Riprova, oppure scrivi su WhatsApp o a '+(EM[fa]||''));
         }).then(function(){b.disabled=false});
     });
   }
