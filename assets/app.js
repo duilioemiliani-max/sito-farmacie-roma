@@ -1,6 +1,40 @@
 /* Farmacie Roma */
 function $(id){return document.getElementById(id)}
 
+// HOME PAGE - pulsanti go e go2
+(function(){
+  var go=$('go'),go2=$('go2');
+  if(!go||!go2)return;
+  
+  function v(id,n){var e=$(id);return e?e.value.trim().slice(0,n):''}
+  
+  go.addEventListener('click',function(e){
+    e.preventDefault();
+    var s=document.querySelector('input[name=s]:checked').value;
+    var f=document.querySelector('input[name=f]:checked').value.split('|');
+    var d=v('det',500);
+    var msg='Buongiorno Farmacia '+f[1]+', '+s.charAt(0).toLowerCase()+s.slice(1)+'.'+(d?' '+d:'');
+    window.location.href='https://wa.me/'+f[0]+'?text='+encodeURIComponent(msg);
+  });
+  
+  go2.addEventListener('click',function(e){
+    e.preventDefault();
+    var f=document.querySelector('input[name=f]:checked').value.split('|');
+    var farmacia=f[1];
+    var s=document.querySelector('input[name=s]:checked').value;
+    
+    var emailMap={
+      'Emiliani':'staffemiliani@gmail.com',
+      'San Luca':'staff.sanluca@gmail.com',
+      'Strampelli':'staff.strampelli@gmail.com'
+    };
+    
+    var msg=s+'\n\n(scritto da sito Farmacie Roma)';
+    var mailto='mailto:'+emailMap[farmacia]+'?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent(msg);
+    window.location.href=mailto;
+  });
+})();
+
 // Dialogo servizi
 (function(){
   var dlg=$('dlg');
