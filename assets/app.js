@@ -155,23 +155,38 @@
     send(dataFor(a.id==='dgo'));
   });
 
-  /* Pulsanti "Scrivi via Email": aprono l'app di posta con destinatario, oggetto e testo gia compilati */
+  /* Pulsanti "Invia via Email": spediscono direttamente la richiesta tramite Web3Forms */
+  var W3KEY='1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5';
   var EM={'Emiliani':'staffemiliani@gmail.com','San Luca':'staff.sanluca@gmail.com','Strampelli':'staff.strampelli@gmail.com'};
-  function syncMail(waId,mailId,altId,radio,subj){
-    var wa=document.getElementById(waId),m=document.getElementById(mailId),alt=document.getElementById(altId);
-    if(!wa||!m)return;
-    function s(){
-      var f=document.querySelector('input[name='+radio+']:checked');if(!f)return;
-      var to=EM[f.value.split('|')[1]];if(!to)return;
+  function mailBtn(btnId,statusId,waId,radio,getServ,getContact){
+    var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
+    if(!b||!wa)return;
+    function farm(){var f=document.querySelector('input[name='+radio+']:checked');return f?f.value.split('|')[1]:''}
+    function hint(){if(st&&!b.disabled&&!st.classList.contains('ok')&&!st.classList.contains('err'))st.textContent='Arriva alla Farmacia '+farm()+'. Oppure scrivi a: '+(EM[farm()]||'')}
+    ['input','change','click'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target!==b){if(st&&ev!=='click'){st.classList.remove('ok','err')}setTimeout(hint,0)}})});
+    hint();
+    b.addEventListener('click',function(){
+      if(v('website',50))return;
+      var c=getContact();
+      if(!c.tel&&!c.email){st.className='note mailto-alt err';st.textContent='Inserisci il telefono o l\'email, così la farmacia può risponderti.';return}
+      if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){st.className='note mailto-alt err';st.textContent='L\'email non sembra corretta: controllala.';return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
-      m.href='mailto:'+to+'?subject='+encodeURIComponent('Richiesta dal sito - '+subj())+'&body='+encodeURIComponent(txt);
-      if(alt)alt.textContent='Se non si apre la posta, scrivi a: '+to;
-    }
-    ['input','change','click'].forEach(function(ev){document.addEventListener(ev,function(){setTimeout(s,0)})});
-    s();
+      var fa=farm(),serv=getServ();
+      var body={access_key:W3KEY,subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Roma',
+        'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
+      if(c.email)body.replyto=c.email;
+      b.disabled=true;st.className='note mailto-alt';st.textContent='Invio in corso…';
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
+        .then(function(r){return r.json()}).then(function(j){
+          if(!j||!j.success)throw 0;
+          st.className='note mailto-alt ok';st.textContent='✓ Richiesta inviata alla Farmacia '+fa+'. Ti ricontatteremo presto.';
+        }).catch(function(){
+          st.className='note mailto-alt err';st.textContent='Invio non riuscito. Riprova, oppure scrivi su WhatsApp o a '+(EM[fa]||'');
+        }).then(function(){b.disabled=false});
+    });
   }
-  syncMail('dgo','dmail','dmailalt','df',function(){return document.getElementById('dt').textContent});
-  syncMail('go','gomail','gomailalt','f',function(){var s2=document.querySelector('input[name=s]:checked'),l=s2&&document.querySelector('label[for='+s2.id+']');return l?l.textContent:'Richiesta'});
+  mailBtn('dmail','dmailalt','dgo','df',function(){return document.getElementById('dt').textContent},function(){return {tel:v('dp',30),email:v('de',100)}});
+  mailBtn('gomail','gomailalt','go','f',function(){var s2=document.querySelector('input[name=s]:checked'),l=s2&&document.querySelector('label[for='+s2.id+']');return l?l.textContent:'Richiesta'},function(){var h=v('hc',100);return h.indexOf('@')>-1?{tel:'',email:h}:{tel:h,email:''}});
 })();
 
 (function(){

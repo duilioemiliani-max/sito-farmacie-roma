@@ -208,3 +208,6 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .btn.btn-mail{margin-top:8px;background:var(--emiliani);color:#fff}
 .mailto-alt{margin-top:6px;text-align:center}
 .ddesc{margin:4px 0 12px;color:var(--muted);font-size:15px;line-height:1.5}
+.hc,.dlg input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink)}
+.mailto-alt.ok{color:var(--strampelli);font-weight:600}.mailto-alt.err{color:#c0392b;font-weight:600}
+.btn.btn-mail:disabled{opacity:.6;cursor:wait}

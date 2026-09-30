@@ -48,12 +48,14 @@
       </div></fieldset>
   </div>
   <fieldset><legend><label for="dn" style="font-weight:600">Nome e cognome (facoltativo)</label></legend><input type="text" id="dn" autocomplete="name"></fieldset>
-  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati (facoltativo)</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel"></fieldset>
+  <fieldset><legend><label for="dp" style="font-weight:600">Telefono per essere ricontattati</label></legend><input type="tel" id="dp" autocomplete="tel" inputmode="tel"></fieldset>
+  <fieldset><legend><label for="de" style="font-weight:600">Email</label></legend><input type="email" id="de" autocomplete="email" inputmode="email"></fieldset>
+  <p class="note">Per l\'invio via email lascia almeno il telefono o l\'email, così la farmacia può risponderti.</p>
   <fieldset><legend><label for="dm" style="font-weight:600">Note (facoltativo)</label></legend><textarea id="dm"></textarea></fieldset>
   <p class="note" id="dhint"></p>
   <div class="hp" aria-hidden="true"><label>Sito web <input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
   <a class="btn" id="dgo" href="#" target="_blank" rel="noopener" style="margin-top:14px">Scrivi su WhatsApp</a>
-  <a class="btn btn-mail" id="dmail" href="#">Scrivi via Email</a>
+  <button type="button" class="btn btn-mail" id="dmail">Invia via Email</button>
   <p class="note mailto-alt" id="dmailalt"></p>
   <p class="note" id="dpriv" hidden>La richiesta viene registrata dalla farmacia scelta per gestirla. <a href="privacy.html">Informativa privacy</a></p>
 </div></dialog>
