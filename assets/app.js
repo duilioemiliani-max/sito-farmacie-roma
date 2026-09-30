@@ -154,41 +154,23 @@
     send(dataFor(a.id==='dgo'));
   });
 
-  function mkDirect(after,dialog){
+  function mkEmailLink(after,dialog){
     if(!after)return;
-    var wrap=document.createElement('div');wrap.className='direct';
-    var b=document.createElement('button');b.type='button';b.className='btn2';b.textContent='Invia senza aprire WhatsApp';
-    var msg=document.createElement('p');msg.className='note directMsg';msg.setAttribute('aria-live','polite');
-    wrap.appendChild(b);wrap.appendChild(msg);
-    after.insertAdjacentElement('afterend',wrap);
-    b.addEventListener('click',function(){
-      if(v('website',50))return;
+    var link=document.getElementById('dgo2');
+    if(!link)return;
+    document.addEventListener('click',function(e){
+      if(e.target!==link)return;
+      e.preventDefault();
       var data=dataFor(dialog);
-      if(!data.telefono){msg.textContent='Inserisci il telefono per essere ricontattato';return}
-      if(!data.email){msg.textContent='Inserisci un email valida';return}
-      b.disabled=true;msg.textContent='Invio in corso…';
       var emailMap={'emiliani':'staffemiliani@gmail.com','sanluca':'staff.sanluca@gmail.com','strampelli':'staff.strampelli@gmail.com'};
+      var farmaciaName={'emiliani':'Farmacia Emiliani','sanluca':'Farmacia San Luca','strampelli':'Farmacia Strampelli'};
       var messageText='Richiesta: '+data.servizio+(data.modalita?'\nModalità: '+data.modalita:'')+(data.giorno?'\nGiorno: '+data.giorno:'')+(data.fascia?'\nFascia: '+data.fascia:'')+(data.nome?'\nNome: '+data.nome:'')+(data.telefono?'\nTelefono: '+data.telefono:'')+(data.email?'\nEmail: '+data.email:'')+(data.note?'\nNote: '+data.note:'');
-      var fd=new FormData();
-      fd.append('access_key','1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5');
-      fd.append('from_name','Farmacie Roma - Sito');
-      fd.append('reply_to',data.email);
-      fd.append('to_email',emailMap[data.sede]);
-      fd.append('subject','Nuova richiesta dal sito - '+data.servizio);
-      fd.append('message',messageText);
-      fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){
-        if(!r.ok)throw 0;
-        if(U&&K)post(data).catch(function(){});
-        msg.textContent='✓ Richiesta inviata! La farmacia ti contatterà ai recapiti che hai lasciato.';
-        msg.classList.add('ok');
-        b.disabled=false;
-      }).catch(function(){
-        b.disabled=false;msg.textContent='Errore: riprova, oppure usa WhatsApp qui sopra.';
-      });
+      var subject='Richiesta da sito - '+data.servizio;
+      var mailto='mailto:'+emailMap[data.sede]+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(messageText);
+      window.location.href=mailto;
     });
   }
-  mkDirect(document.getElementById('go'),false);
-  mkDirect(document.getElementById('dgo'),true);
+  mkEmailLink(document.getElementById('dgo2'),true);
 })();
 
 (function(){
