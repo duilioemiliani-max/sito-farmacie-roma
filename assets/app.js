@@ -1,12 +1,13 @@
 /* Farmacie Roma */
+function $(id){return document.getElementById(id)}
 
+// Dialogo servizi
 (function(){
-  var dlg=document.getElementById('dlg');
+  var dlg=$('dlg');
   if(!dlg)return;
   
   var cur=null;
   
-  function $(id){return document.getElementById(id)}
   function v(id,n){var e=$(id);return e?e.value.trim().slice(0,n):''}
   
   function updateDialog(){
@@ -16,9 +17,10 @@
     var phrase=cur.dataset.phrase||'';
     var msg='Buongiorno Farmacia '+f[1]+', vorrei '+phrase+(n?' Nome: '+n:'')+(m?' Note: '+m:'');
     var url='https://wa.me/'+f[0]+'?text='+encodeURIComponent(msg);
-    document.getElementById('dgo').href=url;
+    $('dgo').href=url;
   }
   
+  // Apri dialogo
   document.addEventListener('click',function(e){
     var btn=e.target.closest('.svc-btn');
     if(!btn)return;
@@ -46,47 +48,50 @@
   
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
   
-  // Pulsante Email
-  var dgo2=$('dgo2');
-  if(dgo2){
-    dgo2.addEventListener('click',function(e){
-      e.preventDefault();
-      if(!cur)return;
-      
-      var de=v('de',100);
-      if(!de){alert('Inserisci la tua email');return}
-      
-      var dp=v('dp',30);
-      if(!dp){alert('Inserisci il tuo telefono');return}
-      
-      var f=document.querySelector('input[name=df]:checked').value.split('|');
-      var farmacia=f[1];
-      var dn=v('dn',100);
-      var dm=v('dm',500);
-      
-      var emailMap={
-        'Emiliani':'staffemiliani@gmail.com',
-        'San Luca':'staff.sanluca@gmail.com',
-        'Strampelli':'staff.strampelli@gmail.com'
-      };
-      
-      var msg='Richiesta servizio: '+cur.dataset.title+'\n'+
-              'Nome: '+(dn||'Non specificato')+'\n'+
-              'Telefono: '+dp+'\n'+
-              'Email: '+de+'\n'+
-              (dm?'Note: '+dm:'');
-      
-      var mailto='mailto:'+emailMap[farmacia]+'?subject='+encodeURIComponent('Richiesta - '+cur.dataset.title)+'&body='+encodeURIComponent(msg);
-      window.location.href=mailto;
-    });
-  }
+  // Pulsante WhatsApp nel dialogo
+  $('dgo').addEventListener('click',function(e){
+    e.preventDefault();
+    var f=document.querySelector('input[name=df]:checked').value.split('|');
+    var msg='Buongiorno Farmacia '+f[1]+', vorrei '+cur.dataset.title;
+    window.location.href='https://wa.me/'+f[0]+'?text='+encodeURIComponent(msg);
+  });
+  
+  // Pulsante Email nel dialogo
+  $('dgo2').addEventListener('click',function(e){
+    e.preventDefault();
+    if(!cur)return;
+    
+    var de=v('de',100);
+    if(!de){alert('Inserisci la tua email');return}
+    
+    var dp=v('dp',30);
+    if(!dp){alert('Inserisci il tuo telefono');return}
+    
+    var f=document.querySelector('input[name=df]:checked').value.split('|');
+    var farmacia=f[1];
+    var dn=v('dn',100);
+    var dm=v('dm',500);
+    
+    var emailMap={
+      'Emiliani':'staffemiliani@gmail.com',
+      'San Luca':'staff.sanluca@gmail.com',
+      'Strampelli':'staff.strampelli@gmail.com'
+    };
+    
+    var msg='Richiesta servizio: '+cur.dataset.title+'\n'+
+            'Nome: '+(dn||'Non specificato')+'\n'+
+            'Telefono: '+dp+'\n'+
+            'Email: '+de+'\n'+
+            (dm?'Note: '+dm:'');
+    
+    var mailto='mailto:'+emailMap[farmacia]+'?subject='+encodeURIComponent('Richiesta - '+cur.dataset.title)+'&body='+encodeURIComponent(msg);
+    window.location.href=mailto;
+  });
 })();
 
-// Menu FAB
+// Menu FAB WhatsApp
 (function(){
   var fab=$('fab'),menu=$('menu');
-  function $(id){return document.getElementById(id)}
-  
   if(!fab||!menu)return;
   
   fab.addEventListener('click',function(){
@@ -111,8 +116,8 @@
 
 // Menu Header
 (function(){
-  var nav=document.getElementById('nav');
-  var nb=document.getElementById('navbtn');
+  var nav=$('nav');
+  var nb=$('navbtn');
   
   if(!nb||!nav)return;
   
