@@ -204,5 +204,7 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .btn2:disabled{opacity:.6;cursor:wait}
 .directMsg{margin:8px 0 0}.directMsg:empty{display:none}.directMsg.ok{color:var(--brand);font-weight:600}
 
-/* Bottone Email - colore blu Emiliani */
-#go2, #dgo2 { background: var(--emiliani); color: #fff; }
+/* Pulsante Email (blu Farmacia Emiliani) e descrizione servizio */
+.btn.btn-mail{margin-top:8px;background:var(--emiliani);color:#fff}
+.mailto-alt{margin-top:6px;text-align:center}
+.ddesc{margin:4px 0 12px;color:var(--muted);font-size:15px;line-height:1.5}
