@@ -62,13 +62,17 @@ function $(id){return document.getElementById(id)}
     cur=btn.closest('.svc');
     $('dt').textContent=cur.dataset.title||'';
     
+    // Mostra la descrizione
+    var dd=$('dd');
+    if(dd)dd.textContent=cur.dataset.desc||'';
+    
     var when=$('when');
     if(when)when.hidden=(cur.dataset.book!=='1');
     
-    var dd=$('dd');
-    if(dd){
+    var date_field=$('dd');
+    if(date_field){
       var t=new Date(),z=function(x){return String(x).padStart(2,'0')};
-      dd.min=t.getFullYear()+'-'+z(t.getMonth()+1)+'-'+z(t.getDate());
+      date_field.min=t.getFullYear()+'-'+z(t.getMonth()+1)+'-'+z(t.getDate());
     }
     
     updateDialog();
