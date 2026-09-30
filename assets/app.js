@@ -178,3 +178,4 @@
   var t='★ '+String(g.voto).replace('.',',')+' su Google ('+g.recensioni+' recensioni)';
   document.querySelectorAll('[data-gr]').forEach(function(e){e.textContent=t;e.title='Dato di '+g.aggiornato});
 })();
+/* Updated Wed Sep 30 10:49:56 UTC 2026 */
