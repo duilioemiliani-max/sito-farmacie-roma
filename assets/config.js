@@ -5,5 +5,9 @@ window.FR_CONFIG = {
   SUPABASE_ANON_KEY: "sb_publishable_LWoMpSDV6oRb_tx9VQIWkg_qSTO5Mmw"
 };
 
-/* Voto Google di Farmacia Emiliani mostrato nel sito. Aggiornalo ogni tanto guardando la scheda su Google. */
-window.FR_GOOGLE = { voto: 4.8, recensioni: 69, aggiornato: "settembre 2026" };
+/* Voti Google delle tre farmacie mostrati nel sito. Aggiornali ogni tanto guardando le schede su Google. */
+window.FR_GOOGLE = { aggiornato: "ottobre 2026", farmacie: {
+  emiliani:   { voto: 4.8, recensioni: 69 },
+  sanluca:    { voto: 4.6, recensioni: 48 },
+  strampelli: { voto: 4.0, recensioni: 69 }
+} };

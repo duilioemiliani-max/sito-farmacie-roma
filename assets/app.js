@@ -196,7 +196,8 @@
 })();
 
 (function(){
-  var g=window.FR_GOOGLE;if(!g||!g.voto)return;
-  var t='★ '+String(g.voto).replace('.',',')+' su Google ('+g.recensioni+' recensioni)';
-  document.querySelectorAll('[data-gr]').forEach(function(e){e.textContent=t;e.title='Dato di '+g.aggiornato});
+  var g=window.FR_GOOGLE;if(!g)return;
+  document.querySelectorAll('[data-gr]').forEach(function(e){
+    var k=e.getAttribute('data-gr')||'emiliani',d=(g.farmacie&&g.farmacie[k])||(k==='emiliani'&&g.voto?g:null);if(!d)return;
+    e.textContent='★ '+Number(d.voto).toFixed(1).replace('.',',')+' su Google ('+d.recensioni+' recensioni)';e.title='Dato di '+g.aggiornato});
 })();
