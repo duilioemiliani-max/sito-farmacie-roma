@@ -8,6 +8,7 @@
     var f=document.querySelector('input[name=f]:checked').value.split('|');
     var d=document.getElementById('det').value.trim();
     var msg='Buongiorno Farmacia '+f[1]+', '+s.charAt(0).toLowerCase()+s.slice(1)+'.'+(d?' '+d:'');
+    if(window.FRRicetta)msg+=window.FRRicetta.text('h');
     go.href='https://wa.me/'+f[0]+'?text='+encodeURIComponent(msg);
   }
   document.querySelectorAll('#richiesta input,#det').forEach(function(e){e.addEventListener('input',upd)});
@@ -171,7 +172,7 @@
     function show(cls,t){st.className='note mailto-alt'+(cls?' '+cls:'');st.textContent=t;try{st.scrollIntoView({block:'nearest'})}catch(e){st.scrollIntoView(false)}}
     b.addEventListener('click',function(){
       if(v('website',50))return;
-      if(btnId==='dmail'&&window.FRRicetta){var rxe=window.FRRicetta.check();if(rxe){show('err',rxe);return}}
+      if(window.FRRicetta){var rxe=window.FRRicetta.check(btnId==='dmail'?'':'h');if(rxe){show('err',rxe);return}}
       var c=getContact();
       if(!c.tel&&!c.email){show('err','Inserisci il telefono o l\'email, così la farmacia può risponderti.');var fi=document.getElementById(btnId==='dmail'?'dp':'hc');if(fi){fi.style.borderColor='#c0392b';fi.addEventListener('input',function(){fi.style.borderColor=''},{once:true})}return}
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}

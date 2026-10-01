@@ -136,34 +136,41 @@
     });
   }
 
-  /* ---- interfaccia nel riquadro del servizio "Invia una ricetta" ---- */
+  /* ---- interfaccia: riquadro dei servizi (prefisso "") e modulo della home (prefisso "h") ---- */
   function $(i){return document.getElementById(i)}
-  function isRicetta(){var rx=$('rx');return rx&&!rx.hidden}
-  function vals(){return {nre:($('rxnre')&&$('rxnre').value||'').toUpperCase().replace(/\s+/g,''),cf:($('rxcf')&&$('rxcf').value||'').toUpperCase().replace(/\s+/g,'')}}
-  function changed(){var d=$('dlg');if(d)d.dispatchEvent(new Event('input',{bubbles:true}))}
-  function st(t,cls){var s=$('rxst');if(!s)return;s.textContent=t;s.className='note rxst'+(cls?' '+cls:'')}
-  function init(){
-    var f=$('rxfile');if(!f)return;
-    document.addEventListener('click',function(e){
-      if(!e.target.closest('.svc-btn'))return;
-      setTimeout(function(){var on=$('dt')&&$('dt').textContent.trim()==='Invia una ricetta';$('rx').hidden=!on;if(on){f.value='';$('rxnre').value='';$('rxcf').value='';st('')}changed()},0);
-    });
+  function on(p){var b=$(p+'rx');return !!(b&&!b.hidden)}
+  function vals(p){function g(i){var e=$(p+i);return (e&&e.value||'').toUpperCase().replace(/\s+/g,'')}return {nre:g('rxnre'),cf:g('rxcf')}}
+  function changed(p){var t=p==='h'?$('det'):$('dlg');if(t)t.dispatchEvent(new Event('input',{bubbles:true}))}
+  function setup(p,isWanted,trigger){
+    var f=$(p+'rxfile'),box=$(p+'rx');if(!f||!box)return;
+    function st(t,cls){var s=$(p+'rxst');if(!s)return;s.textContent=t;s.className='note rxst'+(cls?' '+cls:'')}
+    function reset(){f.value='';$(p+'rxnre').value='';$(p+'rxcf').value='';st('')}
+    function refresh(fresh){var w=isWanted();if(fresh||(!w&&!box.hidden))reset();box.hidden=!w;changed(p)}
+    trigger(refresh);
     f.addEventListener('change',function(){
       var file=f.files&&f.files[0];if(!file)return;
       st('Sto leggendo la ricetta…');onSlow=function(){st('Sto leggendo il testo della ricetta, ci vuole qualche secondo in più…')};
-      read(file).then(function(p){
-        if(p.nre)$('rxnre').value=p.nre;if(p.cf)$('rxcf').value=p.cf;changed();
-        if(p.nre&&p.cf)st(p.via==='testo'?'✓ Codici trovati. Confrontali con la ricetta, soprattutto le cifre del codice NRE.':'✓ Codici trovati. Controlla che siano giusti prima di inviare.','ok');
-        else if(p.nre||p.cf)st('Ho trovato solo '+(p.nre?'il codice NRE':'il codice fiscale')+'. Inserisci a mano quello mancante.','err');
+      read(file).then(function(r){
+        if(r.nre)$(p+'rxnre').value=r.nre;if(r.cf)$(p+'rxcf').value=r.cf;changed(p);
+        if(r.nre&&r.cf)st(r.via==='testo'?'✓ Codici trovati. Confrontali con la ricetta, soprattutto le cifre del codice NRE.':'✓ Codici trovati. Controlla che siano giusti prima di inviare.','ok');
+        else if(r.nre||r.cf)st('Ho trovato solo '+(r.nre?'il codice NRE':'il codice fiscale')+'. Inserisci a mano quello mancante.','err');
         else st('Non sono riuscito a leggere i codici. Riprova con una foto più dritta e luminosa, oppure scrivili a mano.','err');
       }).catch(function(){st('Non sono riuscito ad aprire il file. Riprova, oppure scrivi i codici a mano.','err')});
     });
-    ['rxnre','rxcf'].forEach(function(i){$(i).addEventListener('input',function(){this.value=this.value.toUpperCase()})});
+    ['rxnre','rxcf'].forEach(function(i){$(p+i).addEventListener('input',function(){this.value=this.value.toUpperCase();changed(p)})});
+  }
+  function init(){
+    setup('',function(){return !!$('dt')&&$('dt').textContent.trim()==='Invia una ricetta'},function(refresh){
+      document.addEventListener('click',function(e){if(e.target.closest('.svc-btn'))setTimeout(function(){refresh(true)},0)});
+    });
+    setup('h',function(){var s=document.querySelector('input[name=s]:checked');return !!s&&s.id==='s1'},function(refresh){
+      document.querySelectorAll('input[name=s]').forEach(function(r){r.addEventListener('change',function(){refresh(false)})});refresh(false);
+    });
   }
   window.FRRicetta={
     read:read,parse:parse,cfOk:cfOk,nreOk:nreOk,
-    text:function(){if(!isRicetta())return '';var v=vals();return (v.nre?' Codice NRE: '+v.nre+'.':'')+(v.cf?' Codice fiscale: '+v.cf+'.':'')},
-    check:function(){if(!isRicetta())return '';var v=vals();
+    text:function(p){p=p||'';if(!on(p))return '';var v=vals(p);return (v.nre?' Codice NRE: '+v.nre+'.':'')+(v.cf?' Codice fiscale: '+v.cf+'.':'')},
+    check:function(p){p=p||'';if(!on(p))return '';var v=vals(p);
       if(!v.nre)return 'Carica la ricetta o scrivi il codice NRE. Se la ricetta è cartacea senza NRE, mandane la foto su WhatsApp.';
       if(!nreOk(v.nre))return 'Il codice NRE non sembra corretto: deve avere 15 caratteri (es. 1200A1234567890).';
       if(v.cf&&!cfOk(v.cf))return 'Il codice fiscale non sembra corretto: controllalo.';
