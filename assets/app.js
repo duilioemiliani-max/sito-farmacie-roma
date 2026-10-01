@@ -36,6 +36,7 @@
     }
     var n=$('dn').value.trim(),m=$('dm').value.trim();
     var mc=document.querySelector('input[name=dm2]:checked');var msg='Buongiorno Farmacia '+s[1]+', '+(n?'sono '+n+' e ':'')+'vorrei '+cur.dataset.phrase+(mc?' ('+mc.value.charAt(0).toLowerCase()+mc.value.slice(1)+')':'')+w+'.'+(m?' '+m:'');
+    if(window.FRRicetta)msg+=window.FRRicetta.text();
     go.href='https://wa.me/'+s[0]+'?text='+encodeURIComponent(msg);
   }
   document.addEventListener('click',function(ev){var b=ev.target.closest('.svc-btn');if(!b)return;
@@ -47,7 +48,7 @@
     var mo=cur.dataset.modes?cur.dataset.modes.split('|'):[];
     $('modes').hidden=!mo.length;$('ml').textContent=cur.dataset.ml;
     $('mopts').innerHTML=mo.map(function(x,i){return '<input type="radio" name="dm2" id="mm'+i+'" value="'+x+'"'+(i?'':' checked')+'><label for="mm'+i+'">'+x+'</label>'}).join('');
-    $('dhint').textContent=cur.dataset.title==='Invia una ricetta'?'Allega la foto della ricetta direttamente nella chat di WhatsApp.':(book?'La farmacia ti conferma giorno e orario su WhatsApp.':'');
+    $('dhint').textContent=cur.dataset.title==='Invia una ricetta'?'Su WhatsApp puoi anche allegare la foto della ricetta direttamente nella chat.':(book?'La farmacia ti conferma giorno e orario su WhatsApp.':'');
     var t=new Date(),z=function(x){return String(x).padStart(2,'0')};
     $('dd').min=t.getFullYear()+'-'+z(t.getMonth()+1)+'-'+z(t.getDate());
     upd();d.showModal();});
@@ -170,6 +171,7 @@
     function show(cls,t){st.className='note mailto-alt'+(cls?' '+cls:'');st.textContent=t;try{st.scrollIntoView({block:'nearest'})}catch(e){st.scrollIntoView(false)}}
     b.addEventListener('click',function(){
       if(v('website',50))return;
+      if(btnId==='dmail'&&window.FRRicetta){var rxe=window.FRRicetta.check();if(rxe){show('err',rxe);return}}
       var c=getContact();
       if(!c.tel&&!c.email){show('err','Inserisci il telefono o l\'email, così la farmacia può risponderti.');var fi=document.getElementById(btnId==='dmail'?'dp':'hc');if(fi){fi.style.borderColor='#c0392b';fi.addEventListener('input',function(){fi.style.borderColor=''},{once:true})}return}
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
