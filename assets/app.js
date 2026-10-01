@@ -160,7 +160,7 @@
   /* Pulsanti "Invia via Email": spediscono direttamente la richiesta tramite Web3Forms */
   /* Una chiave Web3Forms per farmacia: ogni richiesta arriva solo alla farmacia scelta.
      Strampelli usa per ora la chiave principale, finche non avra la sua. */
-  var W3KEYS={'Emiliani':'2832345b-2b05-4606-bcc3-619339f7ac5f','San Luca':'2cbb50c0-2ccb-490e-b371-0b0dd70f401a','Strampelli':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5'};
+  var W3KEYS={'Emiliani':'2832345b-2b05-4606-bcc3-619339f7ac5f','San Luca':'4079be4c-f054-47e8-8acb-b3bd7fd30306','Strampelli':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5'};
   var EM={'Emiliani':'staffemiliani@gmail.com','San Luca':'staff.sanluca@gmail.com','Strampelli':'staff.strampelli@gmail.com'};
   function mailBtn(btnId,statusId,waId,radio,getServ,getContact){
     var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
