@@ -156,7 +156,9 @@
   });
 
   /* Pulsanti "Invia via Email": spediscono direttamente la richiesta tramite Web3Forms */
-  var W3KEY='1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5';
+  /* Una chiave Web3Forms per farmacia: ogni richiesta arriva solo alla farmacia scelta.
+     Strampelli usa per ora la chiave principale, finche non avra la sua. */
+  var W3KEYS={'Emiliani':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5','San Luca':'2cbb50c0-2ccb-490e-b371-0b0dd70f401a','Strampelli':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5'};
   var EM={'Emiliani':'staffemiliani@gmail.com','San Luca':'staff.sanluca@gmail.com','Strampelli':'staff.strampelli@gmail.com'};
   function mailBtn(btnId,statusId,waId,radio,getServ,getContact){
     var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
@@ -173,7 +175,7 @@
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
       var fa=farm(),serv=getServ();
-      var body={access_key:W3KEY,subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Roma',
+      var body={access_key:W3KEYS[fa],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Roma',
         'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
       if(c.email)body.replyto=c.email;
       b.disabled=true;show('','Invio in corso…');
