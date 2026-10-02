@@ -235,3 +235,8 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .olegal{margin-top:28px;color:var(--muted);font-size:13.5px;line-height:1.5}
 .svc.offer>div.otop{flex:0 0 auto;flex-direction:row;align-items:center;justify-content:space-between;padding:14px 18px 0}
 .svc.offer div.oprice{padding:0}
+.svc.offer>div.otop{position:relative;justify-content:center;height:170px;padding:14px 18px 0;background:#fff}
+.svc.offer .otop img{width:auto;max-width:100%;height:150px;aspect-ratio:auto;object-fit:contain}
+.svc.offer .otop .oic{font-size:56px}
+.svc.offer .otop .osc{position:absolute;top:12px;right:12px}
+@media (max-width:700px){#obox .filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin-right:-20px;scrollbar-width:none}#obox .filters::-webkit-scrollbar{display:none}#obox .filters button{flex:0 0 auto}}
