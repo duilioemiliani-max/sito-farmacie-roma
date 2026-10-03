@@ -59,10 +59,10 @@
 })();
 
 (function(){
-  var M=[[510,1200]],S={emiliani:[[510,780]],sanluca:[[510,780]],strampelli:[[510,780],[960,1170]]};
+  var M=[[510,1200]],W={emiliani:[[510,1170]]},S={emiliani:[[510,780]],sanluca:[[510,780]],strampelli:[[510,780],[960,1170]]};
   var D=['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'],K=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
   function f(m){return Math.floor(m/60)+':'+('0'+m%60).slice(-2)}
-  function slots(k,d){return d===0?[]:d===6?S[k]:M}
+  function slots(k,d){return d===0?[]:d===6?S[k]:(W[k]||M)}
   function st(k){
     var q=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Rome',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()),o={};
     q.forEach(function(x){o[x.type]=x.value});
