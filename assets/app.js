@@ -1,4 +1,4 @@
-/* Farmacie Roma - script condiviso da tutte le pagine */
+/* Farmacie Emistra - script condiviso da tutte le pagine */
 
 (function(){
   var go=document.getElementById('go');
@@ -178,7 +178,7 @@
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
       var fa=farm(),serv=getServ();
-      var body={access_key:W3KEYS[fa]||W3KEYS['Strampelli'],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Roma',
+      var body={access_key:W3KEYS[fa]||W3KEYS['Strampelli'],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Emistra',
         'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
       if(c.email)body.replyto=c.email;
       b.disabled=true;show('','Invio in corso…');

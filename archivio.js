@@ -59,7 +59,7 @@
       var n=S.rows.filter(function(r){return (S.tab==='*'||r.sede===S.tab)&&(x[0]==='*'||r.stato===x[0])}).length;
       chip(sf,x[1],S.st===x[0],function(){S.st=x[0];render()},n)});
     var nn=S.rows.filter(function(r){return r.stato==='nuova'}).length;
-    document.title=(nn?'('+nn+') ':'')+'Archivio richieste · Farmacie Roma';
+    document.title=(nn?'('+nn+') ':'')+'Archivio richieste · Farmacie Emistra';
     var l=$('list');l.textContent='';var v=view();
     if(!v.length){l.appendChild(el('p','intro','Nessuna richiesta in questa vista.'));return}
     v.forEach(function(r){l.appendChild(card(r))})}

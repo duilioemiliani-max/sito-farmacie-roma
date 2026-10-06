@@ -1,4 +1,4 @@
-/* Farmacie Roma - script condiviso da tutte le pagine */
+/* Farmacie Emistra - script condiviso da tutte le pagine */
 
 (function(){
   var go=document.getElementById('go');
