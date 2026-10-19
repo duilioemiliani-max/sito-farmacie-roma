@@ -157,10 +157,11 @@
     send(dataFor(a.id==='dgo'));
   });
 
-  /* Pulsanti "Invia via Email": spediscono direttamente la richiesta tramite Web3Forms */
+  /* Pulsanti "Invia via Email": spediscono direttamente la richiesta tramite Web3Forms o Formspree */
   /* Una chiave Web3Forms per farmacia: ogni richiesta arriva solo alla farmacia scelta.
-     Strampelli usa per ora la chiave principale, finche non avra la sua. */
+     Strampelli usa Formspree (account staff.strampelli@gmail.com), la chiave Web3Forms resta di riserva. */
   var W3KEYS={'Emiliani':'2832345b-2b05-4606-bcc3-619339f7ac5f','San Luca':'4079be4c-f054-47e8-8acb-b3bd7fd30306','Strampelli':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5'};
+  var FSPREE={'Strampelli':'xppqerjr'};
   var EM={'Emiliani':'staffemiliani@gmail.com','San Luca':'staff.sanluca@gmail.com','Strampelli':'staff.strampelli@gmail.com'};
   function mailBtn(btnId,statusId,waId,radio,getServ,getContact){
     var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
@@ -181,10 +182,12 @@
       var body={access_key:W3KEYS[fa]||W3KEYS['Strampelli'],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Emistra',
         'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
       if(c.email)body.replyto=c.email;
+      var url='https://api.web3forms.com/submit';
+      if(FSPREE[fa]){url='https://formspree.io/f/'+FSPREE[fa];delete body.access_key;delete body.from_name;body._subject=body.subject;delete body.subject;if(c.email){body.email=c.email;delete body.replyto}}
       b.disabled=true;show('','Invio in corso…');
-      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
+      fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
         .then(function(r){return r.json()}).then(function(j){
-          if(!j||!j.success)throw 0;
+          if(!j||!(j.success||j.ok))throw 0;
           show('ok','✓ Richiesta inviata alla Farmacia '+fa+'. Ti ricontatteremo presto.');
         }).catch(function(){
           show('err','Invio non riuscito. Riprova, oppure scrivi su WhatsApp o a '+(EM[fa]||''));
