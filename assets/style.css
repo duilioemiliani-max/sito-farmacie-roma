@@ -134,14 +134,13 @@ tbody th{font-weight:600}
 
 .cimg{position:relative;margin:-22px -22px 30px;width:calc(100% + 44px)}
 .card .cimg>img:first-child{margin:0;width:100%}
-.card .clogo{position:absolute;left:16px;bottom:-28px;margin:0;width:auto;height:84px;max-width:calc(100% - 32px);aspect-ratio:auto;object-fit:contain;background:#fff;border-radius:14px;padding:6px 10px;box-shadow:0 4px 16px rgba(0,0,0,.2);border:1px solid var(--line)}
-.card .clogo[alt*="San Luca"],.card .clogo[alt*="Strampelli"]{height:116px}.flogos img{height:60px!important}
+.card .clogo{position:absolute;left:16px;bottom:-28px;margin:0;width:160px;height:100px;max-width:calc(100% - 32px);aspect-ratio:auto;object-fit:contain;box-sizing:border-box;background:#fff;border-radius:14px;padding:6px 10px;box-shadow:0 4px 16px rgba(0,0,0,.2);border:1px solid var(--line)}
 .mini{flex-direction:row;align-items:center;gap:14px}
 .mini .ml{width:76px;height:64px;object-fit:contain;background:#fff;border-radius:10px;padding:4px;border:1px solid var(--line);flex:none}
 .mini .mt{display:flex;flex-direction:column;gap:4px;min-width:0}
 .mini .mt>span:last-child{color:var(--muted);font-size:15px}
 .flogos{display:flex;flex-wrap:wrap;gap:12px;margin:14px 0 8px}
-.flogos img{height:52px;width:auto;background:#fff;border-radius:10px;padding:4px 8px;border:1px solid var(--line)}
+.flogos img{width:120px;height:64px;object-fit:contain;box-sizing:border-box;background:#fff;border-radius:10px;padding:4px 8px;border:1px solid var(--line)}
 
 .opts label small{display:block;font-size:12.5px;font-weight:500;opacity:.85}
 .geob{margin-top:10px;padding:8px 14px;border:1.5px dashed var(--brand);border-radius:10px;background:transparent;color:var(--brand);font:600 14.5px Figtree,sans-serif;cursor:pointer}
@@ -188,8 +187,8 @@ tbody th{font-weight:600}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* icone delle farmacie in home: il logo e' lo sfondo */
-.chip.logo{position:relative;display:block;height:80px;width:118px;padding:6px 10px;border:0;border-bottom:5px solid var(--c);border-radius:14px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;box-shadow:0 4px 14px rgba(0,0,0,.28)}
-.chip.l-emiliani{width:196px;background-image:url(img/logo-emiliani.jpg)}
+.chip.logo{position:relative;display:block;height:84px;width:150px;box-sizing:border-box;padding:6px 10px;border:0;border-bottom:5px solid var(--c);border-radius:14px;background-color:#fff;background-repeat:no-repeat;background-position:center;background-size:contain;background-origin:content-box;box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.chip.l-emiliani{background-image:url(img/logo-emiliani.jpg)}
 .chip.l-sanluca{background-image:url(img/logo-san-luca.jpg)}
 .chip.l-strampelli{background-image:url(img/logo-strampelli.jpg)}
 
