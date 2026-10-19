@@ -32,8 +32,7 @@ h1{font-size:clamp(38px,6vw,64px);font-weight:800}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--c)}
 /* pannello richiesta */
 .ask{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
-.ask h2{font-size:24px}
-.ask p.sub{margin:6px 0 18px;color:var(--muted);font-size:15px}
+.ask h2{font-size:24px;margin-bottom:18px}
 fieldset{border:0;margin:0 0 18px;padding:0}
 legend{font-weight:600;margin-bottom:8px;padding:0}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
