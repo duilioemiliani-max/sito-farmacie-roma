@@ -167,7 +167,7 @@
     var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
     if(!b||!wa)return;
     function farm(){var f=document.querySelector('input[name='+radio+']:checked');return f?f.value.split('|')[1]:''}
-    function hint(){if(st&&!b.disabled&&!st.classList.contains('ok')&&!st.classList.contains('err'))st.textContent='Arriva alla Farmacia '+farm()+'. Oppure scrivi a: '+(EM[farm()]||'')}
+    function hint(){if(st&&!b.disabled&&!st.classList.contains('ok')&&!st.classList.contains('err'))st.textContent='Arriva alla Farmacia '+farm()+'.\nOppure scrivi a: '+(EM[farm()]||'')}
     ['input','change','click'].forEach(function(ev){document.addEventListener(ev,function(e){if(e.target!==b){if(st&&ev!=='click'){st.classList.remove('ok','err')}setTimeout(hint,0)}})});
     hint();
     function show(cls,t){st.className='note mailto-alt'+(cls?' '+cls:'');st.textContent=t;try{st.scrollIntoView({block:'nearest'})}catch(e){st.scrollIntoView(false)}}
