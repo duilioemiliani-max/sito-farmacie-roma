@@ -46,6 +46,7 @@ textarea{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 18px;border:0;border-radius:12px;background:var(--wa);color:#06280f;font:700 17px Figtree,sans-serif;cursor:pointer;text-decoration:none}
 .btn:hover{filter:brightness(1.06)}
 .note{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+.note mark.hl{display:inline;background:#fff1a8;color:#1f2a2a;font-weight:700;padding:2px 6px;border-radius:5px;line-height:1.7;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 section{padding:48px 0}
 section>.wrap>h2{font-size:clamp(28px,4vw,38px);margin-bottom:8px}
 section>.wrap>p.intro{color:var(--muted);margin:0 0 28px;max-width:56ch}
@@ -206,7 +207,7 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .btn.btn-mail{margin-top:8px;background:var(--emiliani);color:#fff}
 .mailto-alt{margin-top:6px;text-align:center;white-space:pre-line;min-height:2.9em}
 .ddesc{margin:4px 0 12px;color:var(--muted);font-size:15px;line-height:1.5}
-.hc,.dlg input[type=email]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink)}
+.hc,.dlg input[type=email],.dlg input[type=tel]{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;background:var(--bg);color:var(--ink)}
 .mailto-alt.ok{color:var(--strampelli);font-weight:600}.mailto-alt.err{color:#c0392b;font-weight:600}
 .btn.btn-mail:disabled{opacity:.6;cursor:wait}
 /* Caricamento ricetta */
