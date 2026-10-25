@@ -244,3 +244,4 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .picks .svc-pick{padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font:500 15.5px Figtree,sans-serif;background:var(--bg);color:var(--ink);text-align:left}
 .picks .svc-pick:hover{border-color:var(--brand)}
 .picks .svc-pick:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+.opts.sede input:disabled+label{opacity:.4;cursor:not-allowed}.donly{margin:8px 0 0;font-weight:600;color:var(--brand)}.svc-pick small{font-size:.85em;opacity:.8;font-weight:500}
