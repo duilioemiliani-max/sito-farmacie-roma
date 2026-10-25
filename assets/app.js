@@ -229,4 +229,9 @@
   document.querySelectorAll('[data-gr]').forEach(function(e){
     var k=e.getAttribute('data-gr')||'emiliani',d=(g.farmacie&&g.farmacie[k])||(k==='emiliani'&&g.voto?g:null);if(!d)return;
     e.textContent='★ '+Number(d.voto).toFixed(1).replace('.',',')+' su Google ('+d.recensioni+' recensioni)';e.title='Dato di '+g.aggiornato});
+  document.querySelectorAll('[data-rv]').forEach(function(e){
+    var d=g.farmacie&&g.farmacie[e.getAttribute('data-rv')];if(!d)return;
+    e.querySelector('.rvn').textContent=Number(d.voto).toFixed(1).replace('.',',');
+    e.querySelector('.stars').style.setProperty('--r',d.voto);
+    e.querySelector('.rvc').textContent=d.recensioni+' recensioni su Google';e.title='Dato di '+g.aggiornato});
 })();
