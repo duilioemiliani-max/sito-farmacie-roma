@@ -15,12 +15,20 @@
   function show(cls,t){st.className='note mailto-alt'+(cls?' '+cls:'');st.textContent=t;try{st.scrollIntoView({block:'nearest'})}catch(e){}}
   function upd(){
     var f=farm();
-    $('gwa').href='https://wa.me/'+f[0]+'?text='+encodeURIComponent('Buongiorno Farmacia '+f[1]+', vorrei far preparare una preparazione galenica ('+(tipo()==='Veterinaria'?'veterinaria':'uso umano')+'). Vi allego la ricetta.');
+    var n=v('gn',100),m=v('gm',400);
+    $('gwa').href='https://wa.me/'+f[0]+'?text='+encodeURIComponent('Buongiorno Farmacia '+f[1]+', '+(n?'sono '+n+' e ':'')+'vorrei far preparare una preparazione galenica ('+(tipo()==='Veterinaria'?'veterinaria':'uso umano')+'). Vi allego la ricetta.'+(m?' '+m:''));
     $('gtnote').textContent=tipo()==='Veterinaria'?'Ricetta del veterinario per il tuo animale.':'Ricetta del medico per una persona.';
     if(!busy&&!st.classList.contains('ok')&&!st.classList.contains('err'))st.textContent='Arriva alla Farmacia '+f[1]+'.';
   }
   form.addEventListener('change',function(){if(!busy)st.classList.remove('ok','err');upd()});
-  form.addEventListener('input',function(){if(!busy)st.classList.remove('err')});
+  form.addEventListener('input',function(){if(!busy)st.classList.remove('err');upd()});
+  /* Invio su WhatsApp: la richiesta viene registrata nell'archivio (senza file, che il cliente allega nella chat) */
+  $('gwa').addEventListener('click',function(){
+    if(v('gweb',50)||!U||!K)return;var f=farm();
+    try{fetch(U+'/rest/v1/fr_richieste',{method:'POST',headers:{apikey:K,Authorization:'Bearer '+K,'Content-Type':'application/json',Prefer:'return=minimal'},
+      body:JSON.stringify({sede:SEDE[f[1]],servizio:'Preparazione galenica · '+(tipo()==='Veterinaria'?'Veterinaria':'Uso umano')+' (WhatsApp)',
+        nome:v('gn',100)||null,telefono:v('gp',30)||null,note:v('gm',400)||null})}).catch(function(){})}catch(e){}
+  });
   upd();
 
   function typeOf(f){if(EXT[f.type])return f.type;if(/\.pdf$/i.test(f.name))return 'application/pdf';if(/\.hei[cf]$/i.test(f.name))return 'image/heic';return ''}
