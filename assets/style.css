@@ -241,3 +241,6 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .chi{margin-top:24px;max-width:58ch;color:#F5E6D3;font-style:italic;font-size:28px;line-height:1.6;text-shadow:0 1px 3px rgba(0,0,0,.6)}
 .chi p{margin:0 0 10px}.chi p:last-child{margin:0}.chi strong{color:inherit;font-weight:700}
 @media(max-width:820px){.chi{font-size:23px}}
+.picks .svc-pick{padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;font:500 15.5px Figtree,sans-serif;background:var(--bg);color:var(--ink);text-align:left}
+.picks .svc-pick:hover{border-color:var(--brand)}
+.picks .svc-pick:focus-visible{outline:3px solid var(--brand);outline-offset:2px}

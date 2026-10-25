@@ -161,7 +161,7 @@
   }
   function init(){
     setup('',function(){return !!$('dt')&&$('dt').textContent.trim()==='Invia una ricetta'},function(refresh){
-      document.addEventListener('click',function(e){if(e.target.closest('.svc-btn'))setTimeout(function(){refresh(true)},0)});
+      document.addEventListener('click',function(e){if(e.target.closest('.svc-btn,.svc-pick'))setTimeout(function(){refresh(true)},0)});
     });
     setup('h',function(){var s=document.querySelector('input[name=s]:checked');return !!s&&s.id==='s1'},function(refresh){
       document.querySelectorAll('input[name=s]').forEach(function(r){r.addEventListener('change',function(){refresh(false)})});refresh(false);

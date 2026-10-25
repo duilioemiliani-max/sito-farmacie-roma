@@ -40,8 +40,15 @@
     if(window.FRRicetta)msg+=window.FRRicetta.text();
     go.href='https://wa.me/'+s[0]+'?text='+encodeURIComponent(msg);
   }
-  document.addEventListener('click',function(ev){var b=ev.target.closest('.svc-btn');if(!b)return;
-    cur=b.closest('.svc');
+  /* Home, "Prenota un servizio": i pulsanti .svc-pick aprono lo stesso riquadro della pagina Servizi */
+  var hb=$('hbook');
+  function hmode(){if(!hb)return;var c=document.querySelector('input[name=s]:checked'),bk=!!c&&c.id==='s2';
+    hb.hidden=!bk;$('hdet').hidden=bk;$('hsend').hidden=bk}
+  if(hb){document.querySelectorAll('input[name=s]').forEach(function(r){r.addEventListener('change',hmode)});hmode()}
+  document.addEventListener('click',function(ev){var b=ev.target.closest('.svc-btn,.svc-pick');if(!b)return;
+    cur=b.classList.contains('svc-pick')?$(b.dataset.svc):b.closest('.svc');
+    if(b.classList.contains('svc-pick')){var hf=document.querySelector('input[name=f]:checked');
+      document.querySelectorAll('input[name=df]').forEach(function(r){if(hf&&r.value===hf.value){r.checked=true;r.dispatchEvent(new Event('change',{bubbles:true}))}})}
     $('dt').textContent=cur.dataset.title;
     var dsc=cur.querySelector('h3+p');if($('ddesc'))$('ddesc').textContent=dsc?dsc.textContent:'';
     var book=cur.dataset.book==='1';
