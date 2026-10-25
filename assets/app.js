@@ -45,6 +45,19 @@
   function hmode(){if(!hb)return;var c=document.querySelector('input[name=s]:checked'),bk=!!c&&c.id==='s2';
     hb.hidden=!bk;$('hdet').hidden=bk;$('hsend').hidden=bk}
   if(hb){document.querySelectorAll('input[name=s]').forEach(function(r){r.addEventListener('change',hmode)});hmode()}
+  /* Home: lo sfondo è dimensionato sull'altezza della scelta più alta, così non cambia passando da una scelta all'altra */
+  var hero=document.querySelector('.hero');
+  if(hero&&hb&&$('hrx')){
+    var hw=0,hmax=0,parts=['hrx','hbook','hdet','hsend'].map($);
+    var hset=function(h){if(h>hmax){hmax=h;hero.style.setProperty('--hh',h+'px');hero.classList.add('hh')}};
+    var hmeasure=function(){
+      var old=parts.map(function(e){return e.hidden});hmax=0;
+      [[0,1,0,0],[1,0,1,1],[1,1,0,0]].forEach(function(st){parts.forEach(function(e,i){e.hidden=!!st[i]});hset(hero.offsetHeight)});
+      parts.forEach(function(e,i){e.hidden=old[i]});hset(hero.offsetHeight);
+    };
+    hmeasure();
+    if(window.ResizeObserver)new ResizeObserver(function(){if(hero.offsetWidth!==hw){hw=hero.offsetWidth;hmeasure()}else hset(hero.offsetHeight)}).observe(hero);
+  }
   document.addEventListener('click',function(ev){var b=ev.target.closest('.svc-btn,.svc-pick');if(!b)return;
     cur=b.classList.contains('svc-pick')?$(b.dataset.svc):b.closest('.svc');
     if(b.classList.contains('svc-pick')){var hf=document.querySelector('input[name=f]:checked');
