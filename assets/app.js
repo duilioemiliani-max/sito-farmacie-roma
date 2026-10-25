@@ -189,6 +189,18 @@
   var W3KEYS={'Emiliani':'2832345b-2b05-4606-bcc3-619339f7ac5f','San Luca':'4079be4c-f054-47e8-8acb-b3bd7fd30306','Strampelli':'1d95b3a9-1510-4a1e-b50b-b0f500b0e2a5'};
   var FSPREE={'Strampelli':'xppqerjr'};
   var EM={'Emiliani':'staffemiliani@gmail.com','San Luca':'staff.sanluca@gmail.com','Strampelli':'staff.strampelli@gmail.com'};
+  function sendMail(fa,serv,fields,email){
+    var body={access_key:W3KEYS[fa]||W3KEYS['Strampelli'],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Emistra',
+      'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv};
+    for(var k in fields)body[k]=fields[k];
+    if(email)body.replyto=email;
+    var url='https://api.web3forms.com/submit';
+    if(FSPREE[fa]){url='https://formspree.io/f/'+FSPREE[fa];delete body.access_key;delete body.from_name;body._subject=body.subject;delete body.subject;if(email){body.email=email;delete body.replyto}}
+    return fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json()}).then(function(j){if(!j||!(j.success||j.ok))throw 0})
+  }
+  /* Usato anche dalla pagina Preparazioni galeniche (assets/galeniche.js) */
+  window.FRMail={send:sendMail,email:function(fa){return EM[fa]||''}};
   function mailBtn(btnId,statusId,waId,radio,getServ,getContact){
     var b=document.getElementById(btnId),st=document.getElementById(statusId),wa=document.getElementById(waId);
     if(!b||!wa)return;
@@ -205,15 +217,9 @@
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
       var fa=farm(),serv=getServ();
-      var body={access_key:W3KEYS[fa]||W3KEYS['Strampelli'],subject:'Richiesta dal sito - Farmacia '+fa+' - '+serv,from_name:'Sito Farmacie Emistra',
-        'Farmacia':fa,'Email farmacia':EM[fa]||'','Servizio':serv,'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'};
-      if(c.email)body.replyto=c.email;
-      var url='https://api.web3forms.com/submit';
-      if(FSPREE[fa]){url='https://formspree.io/f/'+FSPREE[fa];delete body.access_key;delete body.from_name;body._subject=body.subject;delete body.subject;if(c.email){body.email=c.email;delete body.replyto}}
       b.disabled=true;show('','Invio in corso…');
-      fetch(url,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(body)})
-        .then(function(r){return r.json()}).then(function(j){
-          if(!j||!(j.success||j.ok))throw 0;
+      sendMail(fa,serv,{'Messaggio':txt,'Telefono cliente':c.tel||'-','Email cliente':c.email||'-'},c.email)
+        .then(function(){
           show('ok','✓ Richiesta inviata alla Farmacia '+fa+'. Ti ricontatteremo presto.');
         }).catch(function(){
           show('err','Invio non riuscito. Riprova, oppure scrivi su WhatsApp o a '+(EM[fa]||''));

@@ -7,6 +7,7 @@ Sito statico a più pagine: non serve nessun server né database.
 - `servizi.html` — tutti i servizi, con filtri e prenotazione via WhatsApp
 - `convenzioni.html` — servizi in convenzione ASL / mutuabili / a pagamento
 - `farmacie.html` — le tre sedi (indirizzi, orari, contatti)
+- `preparazioni-galeniche.html` — carica la ricetta di una preparazione galenica (uso umano o veterinario, foto o PDF): il file va nell'archivio privato e la farmacia riceve un'email di avviso. Richiede `supabase-galeniche.sql` (da eseguire una volta in Supabase)
 - `privacy.html` — informativa privacy (BOZZA: completa le parti tra parentesi quadre)
 - `archivio.html` — archivio richieste per il personale (accesso con email e password)
 

@@ -76,6 +76,9 @@
     if(r.telefono){var p=el('p','meta');p.appendChild(el('b',null,'Telefono: '));c.appendChild(p);var a=el('a',null,r.telefono);a.href='tel:'+r.telefono.replace(/[^\d+]/g,'');p.appendChild(a);
       var w=el('a',null,' · WhatsApp');w.href='https://wa.me/'+waNum(r.telefono);w.target='_blank';w.rel='noopener';p.appendChild(w)}
     line(c,'Note',r.note);
+    if(r.allegati&&r.allegati.length){var fl=el('div','files acts2');
+      r.allegati.forEach(function(path,i){var b=el('button',null,'Apri '+(/\.pdf$/i.test(path)?'PDF':'foto')+(r.allegati.length>1?' '+(i+1):''));b.type='button';
+        b.addEventListener('click',function(){openFile(path)});fl.appendChild(b)});c.appendChild(fl)}
     var ac=el('div','acts2');
     var A={nuova:[['in_carico','Prendi in carico'],['completata','Completata'],['annullata','Annulla']],
       in_carico:[['completata','Completata'],['annullata','Annulla'],['nuova','Rimetti tra le nuove']],
@@ -83,6 +86,13 @@
     A.forEach(function(x){var b=el('button',x[0]==='completata'?'primary':null,x[1]);b.type='button';
       b.addEventListener('click',function(){b.disabled=true;setStato(r,x[0])});ac.appendChild(b)});
     c.appendChild(ac);return c}
+  /* Ricette delle preparazioni galeniche: link temporaneo (10 minuti) al file nella cartella privata */
+  function openFile(path){
+    var w=window.open('','_blank');
+    call('/storage/v1/object/sign/fr_galeniche/'+path.split('/').map(encodeURIComponent).join('/'),{method:'POST',body:JSON.stringify({expiresIn:600})})
+      .then(function(r){return r.ok?r.json():Promise.reject()})
+      .then(function(j){var u=U+'/storage/v1'+j.signedURL;if(w)w.location=u;else location.href=u})
+      .catch(function(){if(w)w.close();alert('Non riesco ad aprire il file. Riprova.')})}
   function setStato(r,s){
     var body={stato:s,gestita_il:(s==='nuova')?null:new Date().toISOString()};
     call('/rest/v1/fr_richieste?id=eq.'+encodeURIComponent(r.id),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)})
