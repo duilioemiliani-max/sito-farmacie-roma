@@ -201,7 +201,7 @@
       if(v('website',50))return;
       if(window.FRRicetta){var rxe=window.FRRicetta.check(btnId==='dmail'?'':'h');if(rxe){show('err',rxe);return}}
       var c=getContact();
-      if(!c.tel&&!c.email){show('err','Inserisci il telefono o l\'email, così la farmacia può risponderti.');var fi=document.getElementById(btnId==='dmail'?'dp':'hc');if(fi){fi.style.borderColor='#c0392b';fi.addEventListener('input',function(){fi.style.borderColor=''},{once:true})}return}
+      if(!c.tel&&!c.email){show('err','Inserisci email o cellulare e attendi conferma da parte della farmacia.');var fi=document.getElementById(btnId==='dmail'?'dp':'hc');if(fi){fi.style.borderColor='#c0392b';fi.addEventListener('input',function(){fi.style.borderColor=''},{once:true})}return}
       if(c.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)){show('err','L\'email non sembra corretta: controllala.');return}
       var txt='';try{txt=new URL(wa.href).searchParams.get('text')||''}catch(e){}
       var fa=farm(),serv=getServ();
