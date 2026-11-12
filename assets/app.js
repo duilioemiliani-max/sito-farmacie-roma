@@ -250,19 +250,17 @@
   /* alterna le farmacie: una Emiliani, una San Luca, una Strampelli... */
   var G={};L.forEach(function(r){(G[r.farmacia]=G[r.farmacia]||[]).push(r)});
   var K=Object.keys(G),M=[],i=0;while(M.length<L.length){K.forEach(function(k){if(G[k][i])M.push(G[k][i])});i++}
-  function card(r,dup){
+  function card(r){
     var f=document.createElement('figure');f.className='rvq';f.style.setProperty('--c','var(--'+(N[r.farmacia]?r.farmacia:'brand')+')');
-    if(dup)f.setAttribute('aria-hidden','true');
     var st=document.createElement('div');st.className='rvq-s';st.textContent='★★★★★'.slice(0,Math.round(r.stelle||5));
     var q=document.createElement('blockquote');q.textContent='«'+r.testo+'»';
     var c=document.createElement('figcaption');var b=document.createElement('b');b.textContent=r.nome||'Cliente';
     var s=document.createElement('span');s.textContent=N[r.farmacia]||'';c.appendChild(b);c.appendChild(s);
     f.appendChild(st);f.appendChild(q);f.appendChild(c);return f}
-  M.forEach(function(r){tr.appendChild(card(r))});
-  M.forEach(function(r){tr.appendChild(card(r,true))});
-  tr.style.setProperty('--dur',Math.max(30,M.length*7)+'s');
+  M.forEach(function(r,j){var c=card(r);if(j)c.setAttribute('aria-hidden','true');else c.classList.add('on');tr.appendChild(c)});
   box.hidden=false;
-  box.addEventListener('click',function(){box.classList.toggle('paused')});
+  var C=tr.children,n=0;if(C.length<2)return;
+  setInterval(function(){C[n].classList.remove('on');C[n].setAttribute('aria-hidden','true');n=(n+1)%C.length;C[n].classList.add('on');C[n].removeAttribute('aria-hidden')},6000);
 })();
 
 /* Popup per scaricare l'app di Farmacia Emiliani (link in config.js → FR_APP) */
