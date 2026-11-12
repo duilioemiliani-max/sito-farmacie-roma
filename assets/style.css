@@ -275,7 +275,7 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 /* Recensioni che scorrono */
 .rvt{margin:0 auto 18px;max-width:640px}
 .rvt-track{display:grid}
-.rvq{grid-area:1/1;margin:0;display:flex;flex-direction:column;gap:10px;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s}
+.rvq{grid-area:1/1;margin:0;display:flex;flex-direction:column;gap:10px;padding:10px 22px;background:transparent;border-left:6px solid var(--c);opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s}
 .rvq.on{opacity:1;visibility:visible;transition:opacity .8s ease .3s,visibility 0s}
 .rvq-s{color:#f4b400;letter-spacing:2px;font-size:20px;line-height:1}
 .rvq blockquote{margin:0;font-size:18px;line-height:1.55}
