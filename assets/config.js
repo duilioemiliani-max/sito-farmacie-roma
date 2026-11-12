@@ -39,3 +39,10 @@ window.FR_RECENSIONI = [
   { farmacia: "strampelli", nome: "Claudia O.", stelle: 5, testo: "Un grazie immenso ai dottori della farmacia Strampelli… serena e felice del prezioso servizio medico che offrite alla nostra comunità" },
   { farmacia: "strampelli", nome: "Roberto P.", stelle: 5, testo: "Personale molto gentile e disponibile, farmacia tradizionale ben rifornita, offre diversi servizi" }
 ];
+
+/* Popup «Scarica l'app di Farmacia Emiliani» che compare all'apertura del sito.
+   Inserisci i link degli store. Se sono vuoti il popup non compare. */
+window.FR_APP = {
+  android: "",  /* link Google Play, es. https://play.google.com/store/apps/details?id=... */
+  ios: ""       /* link App Store, es. https://apps.apple.com/it/app/... */
+};

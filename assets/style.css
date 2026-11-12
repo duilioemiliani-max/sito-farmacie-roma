@@ -284,3 +284,15 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .rvq figcaption b{color:var(--ink);font-size:15px}.rvq figcaption span{color:var(--c);font-weight:700}
 @media (max-width:600px){.rvq{width:260px}}
 @media (prefers-reduced-motion:reduce){.rvt{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.rvt-track{animation:none}.rvq[aria-hidden]{display:none}}
+
+/* Popup app Farmacia Emiliani */
+.appop{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,25,23,.55);animation:appin .25s ease}
+.appop-box{position:relative;width:100%;max-width:380px;background:var(--surface);color:var(--ink);border-radius:18px;border-top:6px solid var(--emiliani);padding:26px 22px 18px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.appop-box img{width:84px;height:70px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:12px;padding:6px}
+.appop-box h2{font-size:24px;margin:14px 0 8px}.appop-box p{margin:0 0 16px;color:var(--muted)}
+.appop-b{display:flex;flex-direction:column;gap:8px}
+.appop-b a{display:block;padding:13px 16px;border-radius:12px;background:var(--emiliani);color:#fff;font:700 17px Figtree,sans-serif;text-decoration:none}
+.appop-no{margin-top:10px;background:none;border:0;color:var(--muted);font:600 15px Figtree,sans-serif;padding:8px;cursor:pointer}
+.appop-x{position:absolute;top:8px;right:10px;width:40px;height:40px;border:0;background:none;color:var(--muted);font-size:28px;line-height:1;cursor:pointer}
+@keyframes appin{from{opacity:0}to{opacity:1}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .appop-b a{color:#0c1a19}}:root[data-theme="dark"] .appop-b a{color:#0c1a19}

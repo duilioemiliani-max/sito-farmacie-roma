@@ -264,3 +264,22 @@
   box.hidden=false;
   box.addEventListener('click',function(){box.classList.toggle('paused')});
 })();
+
+/* Popup per scaricare l'app di Farmacia Emiliani (link in config.js → FR_APP) */
+(function(){
+  var A=window.FR_APP||{},K='fr_app_popup';
+  if(!A.android&&!A.ios)return;
+  if(/privacy/.test(location.pathname))return;
+  if(/; wv\)/.test(navigator.userAgent))return; /* già dentro un'app */
+  try{var t=+localStorage.getItem(K);if(t&&Date.now()-t<7*864e5)return}catch(e){}
+  var ua=navigator.userAgent,isA=/Android/i.test(ua),isI=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
+  var L=[];if(A.android&&!isI)L.push(['Scarica da Google Play',A.android]);if(A.ios&&!isA)L.push(["Scarica dall'App Store",A.ios]);
+  if(!L.length)L=[[A.android?'Scarica da Google Play':"Scarica dall'App Store",A.android||A.ios]];
+  var o=document.createElement('div');o.className='appop';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','appopt');
+  o.innerHTML='<div class="appop-box"><button type="button" class="appop-x" aria-label="Chiudi">×</button><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><h2 id="appopt">Scarica l\'app di Farmacia Emiliani</h2><p>Invia le ricette, prenota i servizi e ricevi le offerte direttamente dal telefono.</p><div class="appop-b"></div><button type="button" class="appop-no">Non ora</button></div>';
+  var bx=o.querySelector('.appop-b');L.forEach(function(l){var a=document.createElement('a');a.href=l[1];a.target='_blank';a.rel='noopener';a.textContent=l[0];a.addEventListener('click',close);bx.appendChild(a)});
+  function close(){try{localStorage.setItem(K,Date.now())}catch(e){}o.remove();document.removeEventListener('keydown',esc)}
+  function esc(e){if(e.key==='Escape')close()}
+  o.querySelector('.appop-x').onclick=close;o.querySelector('.appop-no').onclick=close;o.addEventListener('click',function(e){if(e.target===o)close()});document.addEventListener('keydown',esc);
+  setTimeout(function(){document.body.appendChild(o);o.querySelector('.appop-b a').focus()},1200);
+})();
