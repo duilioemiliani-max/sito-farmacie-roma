@@ -11,3 +11,10 @@ window.FR_GOOGLE = { aggiornato: "ottobre 2026", farmacie: {
   sanluca:    { voto: 4.6, recensioni: 48 },
   strampelli: { voto: 4.0, recensioni: 69 }
 } };
+
+/* Recensioni a 5 stelle che scorrono nel riquadro della home (sezione «Le recensioni su Google").
+   Copiale da Google così come sono scritte (testo e nome come appare su Google, es. "Maria R.").
+   farmacia: "emiliani", "sanluca" o "strampelli". Se la lista è vuota il riquadro non compare. */
+window.FR_RECENSIONI = [
+  /* { farmacia: "emiliani", nome: "Nome C.", stelle: 5, testo: "Testo della recensione" }, */
+];
