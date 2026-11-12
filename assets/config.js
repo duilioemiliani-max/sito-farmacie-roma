@@ -43,6 +43,6 @@ window.FR_RECENSIONI = [
 /* Popup «Scarica l'app di Farmacia Emiliani» che compare all'apertura del sito.
    Inserisci i link degli store. Se sono vuoti il popup non compare. */
 window.FR_APP = {
-  android: "",  /* link Google Play, es. https://play.google.com/store/apps/details?id=... */
-  ios: ""       /* link App Store, es. https://apps.apple.com/it/app/... */
+  android: "https://play.google.com/store/apps/details?id=it.farmaciaemiliani.app",
+  ios: ""  /* link App Store: per ora l'app non c'è; su iPhone il popup non compare */
 };

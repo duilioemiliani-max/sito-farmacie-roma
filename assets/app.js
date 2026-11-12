@@ -274,9 +274,9 @@
   try{var t=+localStorage.getItem(K);if(t&&Date.now()-t<7*864e5)return}catch(e){}
   var ua=navigator.userAgent,isA=/Android/i.test(ua),isI=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
   var L=[];if(A.android&&!isI)L.push(['Scarica da Google Play',A.android]);if(A.ios&&!isA)L.push(["Scarica dall'App Store",A.ios]);
-  if(!L.length)L=[[A.android?'Scarica da Google Play':"Scarica dall'App Store",A.android||A.ios]];
+  if(!L.length)return; /* nessuno store per questo dispositivo */
   var o=document.createElement('div');o.className='appop';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','appopt');
-  o.innerHTML='<div class="appop-box"><button type="button" class="appop-x" aria-label="Chiudi">×</button><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><h2 id="appopt">Scarica l\'app di Farmacia Emiliani</h2><p>Invia le ricette, prenota i servizi e ricevi le offerte direttamente dal telefono.</p><div class="appop-b"></div><button type="button" class="appop-no">Non ora</button></div>';
+  o.innerHTML='<div class="appop-box"><button type="button" class="appop-x" aria-label="Chiudi">×</button><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><h2 id="appopt">Scarica l\'app di Farmacia Emiliani</h2><p>Orari sempre aggiornati, offerte del mese, prenotazione dei servizi, promemoria per i farmaci e tessere sempre sul telefono.</p><div class="appop-b"></div><button type="button" class="appop-no">Non ora</button></div>';
   var bx=o.querySelector('.appop-b');L.forEach(function(l){var a=document.createElement('a');a.href=l[1];a.target='_blank';a.rel='noopener';a.textContent=l[0];a.addEventListener('click',close);bx.appendChild(a)});
   function close(){try{localStorage.setItem(K,Date.now())}catch(e){}o.remove();document.removeEventListener('keydown',esc)}
   function esc(e){if(e.key==='Escape')close()}
