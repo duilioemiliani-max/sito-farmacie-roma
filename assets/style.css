@@ -273,17 +273,16 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .rq .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 
 /* Recensioni che scorrono */
-.rvt{position:relative;overflow:hidden;margin:0 0 18px;padding:6px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.rvt-track{display:flex;gap:14px;width:max-content;animation:rvscroll var(--dur,60s) linear infinite}
-.rvt:hover .rvt-track,.rvt:focus-within .rvt-track,.rvt.paused .rvt-track{animation-play-state:paused}
-@keyframes rvscroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 7px))}}
-.rvq{margin:0;width:300px;flex:none;display:flex;flex-direction:column;gap:8px;padding:14px 16px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px}
-.rvq-s{color:#f4b400;letter-spacing:2px;font-size:18px;line-height:1}
-.rvq blockquote{margin:0;font-size:16px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
+.rvt{margin:0 auto 18px;max-width:640px}
+.rvt-track{display:grid}
+.rvq{grid-area:1/1;margin:0;display:flex;flex-direction:column;gap:10px;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility 0s linear .8s}
+.rvq.on{opacity:1;visibility:visible;transition:opacity .8s ease .3s,visibility 0s}
+.rvq-s{color:#f4b400;letter-spacing:2px;font-size:20px;line-height:1}
+.rvq blockquote{margin:0;font-size:18px;line-height:1.55}
 .rvq figcaption{margin-top:auto;display:flex;flex-direction:column;font-size:14px;color:var(--muted)}
 .rvq figcaption b{color:var(--ink);font-size:15px}.rvq figcaption span{color:var(--c);font-weight:700}
-@media (max-width:600px){.rvq{width:260px}}
-@media (prefers-reduced-motion:reduce){.rvt{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.rvt-track{animation:none}.rvq[aria-hidden]{display:none}}
+@media (max-width:600px){.rvq{padding:16px 18px}.rvq blockquote{font-size:16.5px}}
+@media (prefers-reduced-motion:reduce){.rvq,.rvq.on{transition:none}}
 
 /* Popup app Farmacia Emiliani */
 .appop{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(6,25,23,.55);animation:appin .25s ease}
