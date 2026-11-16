@@ -197,11 +197,3 @@ a.chip.logo{text-decoration:none;color:inherit;transition:transform .15s,box-sha
 a.chip.logo:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.38)}
 a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){a.chip.logo{transition:none}a.chip.logo:hover{transform:none}}
-/* Giornata a tema in home */
-.giornata .gt{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:26px;align-items:center;background:var(--surface);border:2px solid var(--emiliani);border-radius:18px;padding:20px}
-.gt-img img{display:block;width:100%;height:auto;border-radius:12px}
-.gt-tag{display:inline-block;background:var(--emiliani);color:#fff;font-weight:700;font-size:14px;border-radius:999px;padding:4px 12px}
-.gt-txt h2{margin:10px 0 6px}.gt-txt p{margin:0 0 8px}.gt-quando{font-size:18px}.gt-dove{color:var(--muted)}
-.gt-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.gt-btns .btn{width:auto}
-@media (max-width:720px){.giornata .gt{grid-template-columns:1fr}}
-.gt-btns .btnl{background:var(--brand);color:var(--brand-ink)}
