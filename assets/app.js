@@ -263,21 +263,67 @@
   setInterval(function(){C[n].classList.remove('on');C[n].setAttribute('aria-hidden','true');n=(n+1)%C.length;C[n].classList.add('on');C[n].removeAttribute('aria-hidden')},6000);
 })();
 
-/* Popup per scaricare l'app di Farmacia Emiliani (link in config.js → FR_APP) */
+/* Invito a scaricare l'app Farmacie Emistra (link in config.js → FR_APP)
+   - voce "Scarica l'app" nel menu, su tutte le pagine
+   - riquadro prima del piè di pagina: QR sul computer, tasto Google Play su Android, "presto" su iPhone
+   - popup una volta ogni 7 giorni e barretta in basso su Android (chiudibile)
+   - richiami [data-app-hint] nelle pagine (offerte, giornate) e dopo una prenotazione
+   I link a Google Play portano utm_medium diverso per capire da dove arrivano le installazioni. */
 (function(){
-  var A=window.FR_APP||{},K='fr_app_popup';
-  if(!A.android&&!A.ios)return;
+  var A=window.FR_APP||{};if(!A.android)return;
   if(/privacy/.test(location.pathname))return;
-  if(/; wv\)/.test(navigator.userAgent))return; /* già dentro un'app */
-  try{var t=+localStorage.getItem(K);if(t&&Date.now()-t<7*864e5)return}catch(e){}
-  var ua=navigator.userAgent,isA=/Android/i.test(ua),isI=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document);
-  var L=[];if(A.android&&!isI)L.push(['Scarica da Google Play',A.android]);if(A.ios&&!isA)L.push(["Scarica dall'App Store",A.ios]);
-  if(!L.length)return; /* nessuno store per questo dispositivo */
-  var o=document.createElement('div');o.className='appop';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','appopt');
-  o.innerHTML='<div class="appop-box"><button type="button" class="appop-x" aria-label="Chiudi">×</button><img src="assets/img/logo-emiliani.jpg" alt="Logo Farmacia Emiliani"><h2 id="appopt">Scarica l\'app di Farmacia Emiliani</h2><p>Orari sempre aggiornati, offerte del mese, prenotazione dei servizi, promemoria per i farmaci e tessere sempre sul telefono.</p><div class="appop-b"></div><button type="button" class="appop-no">Non ora</button></div>';
-  var bx=o.querySelector('.appop-b');L.forEach(function(l){var a=document.createElement('a');a.href=l[1];a.target='_blank';a.rel='noopener';a.textContent=l[0];a.addEventListener('click',close);bx.appendChild(a)});
-  function close(){try{localStorage.setItem(K,Date.now())}catch(e){}o.remove();document.removeEventListener('keydown',esc)}
-  function esc(e){if(e.key==='Escape')close()}
-  o.querySelector('.appop-x').onclick=close;o.querySelector('.appop-no').onclick=close;o.addEventListener('click',function(e){if(e.target===o)close()});document.addEventListener('keydown',esc);
-  setTimeout(function(){document.body.appendChild(o);o.querySelector('.appop-b a').focus()},1200);
+  var ua=navigator.userAgent;
+  if(/; wv\)/.test(ua))return; /* già dentro un'app */
+  var isI=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/.test(ua)&&'ontouchend' in document),isA=/Android/i.test(ua);
+  function play(m){return A.android+(A.android.indexOf('?')<0?'?':'&')+'referrer='+encodeURIComponent('utm_source=sito&utm_medium='+m)}
+  var ICO='<svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M1 1.2 18.5 11 1 20.8z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+  function gp(m,t){return '<a class="gp" href="'+play(m)+'" target="_blank" rel="noopener">'+ICO+(t||'Scarica da Google Play')+'</a>'}
+  function get(k){try{return +localStorage.getItem(k)||0}catch(e){return 0}}
+  function set(k){try{localStorage.setItem(k,Date.now())}catch(e){}}
+
+  /* 1. voce nel menu */
+  var nav=document.getElementById('nav');
+  if(nav&&!isI){var na=document.createElement('a');na.className='nav-app';na.textContent='📱 Scarica l\'app';
+    if(isA){na.href=play('menu');na.target='_blank';na.rel='noopener'}else na.href='#app';
+    nav.appendChild(na)}
+
+  /* 2. riquadro prima del piè di pagina */
+  var ft=document.querySelector('footer');
+  if(ft){var s=document.createElement('section');s.className='appband';s.id='app';s.setAttribute('aria-labelledby','abt');
+    var dx=isI?'<p class="ab-ios">Per ora l\'app è disponibile per <b>Android</b>. Presto anche su iPhone.</p>'
+      :'<img class="ab-qr" src="assets/img/qr-app.svg" alt="Codice QR per scaricare l\'app da Google Play" width="168" height="168" loading="lazy"><small>Inquadra il codice con la fotocamera del telefono Android</small>'+gp(isA?'riquadro':'riquadro-pc');
+    s.innerHTML='<div class="wrap"><div class="ab"><div><div class="ab-h"><img src="assets/img/logo-gruppo.png" alt=""><div><h2 id="abt">Scarica l\'app Farmacie Emistra</h2><p class="ab-sub">Gratis, per Emiliani, San Luca e Strampelli</p></div></div>'+
+      '<ul><li>Prenoti i servizi in un tocco</li><li>Offerte del mese sempre con te</li><li>Promemoria per i farmaci</li><li>Pressione, glicemia e colesterolo</li><li>Tessere fedeltà sul telefono</li><li>Avvisi su giornate e screening</li></ul></div>'+
+      '<div class="ab-r">'+dx+'</div></div></div>';
+    ft.parentNode.insertBefore(s,ft)}
+
+  /* 3. richiami nelle pagine */
+  if(!isI)document.querySelectorAll('[data-app-hint]').forEach(function(p){
+    p.className='app-hint';p.innerHTML=p.getAttribute('data-app-hint')+' <a href="'+(isA?play('richiamo-'+(p.id||'pagina')):'#app')+'"'+(isA?' target="_blank" rel="noopener"':'')+'>Scarica l\'app</a>';p.hidden=false});
+  /* dopo una richiesta inviata dal modulo */
+  var st=document.getElementById('dmailalt');
+  if(st&&!isI&&window.MutationObserver){new MutationObserver(function(){
+    if(st.classList.contains('ok')&&!st.querySelector('a')){st.appendChild(document.createTextNode(' Con l\'app Farmacie Emistra la prossima volta prenoti in un tocco: '));
+      var a=document.createElement('a');a.textContent='scaricala qui';a.href=isA?play('dopo-prenotazione'):'#app';if(isA){a.target='_blank';a.rel='noopener'}else a.addEventListener('click',function(){var d=document.getElementById('dlg');if(d&&d.close)d.close()});st.appendChild(a)}}).observe(st,{attributes:true,attributeFilter:['class']})}
+
+  if(isI||!isA)return; /* popup e barretta solo su Android */
+  var KP='fr_app_popup',KB='fr_app_barra';
+
+  /* 4. popup (una volta ogni 7 giorni) */
+  if(Date.now()-get(KP)>7*864e5){
+    var o=document.createElement('div');o.className='appop';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','appopt');
+    o.innerHTML='<div class="appop-box"><button type="button" class="appop-x" aria-label="Chiudi">×</button><img src="assets/img/logo-gruppo.png" alt="Logo Farmacie Emistra"><h2 id="appopt">Scarica l\'app Farmacie Emistra</h2><p>Gratis, per Emiliani, San Luca e Strampelli: prenoti i servizi in un tocco, vedi le offerte del mese, hai i promemoria per i farmaci e le tessere sempre sul telefono.</p><div class="appop-b"><a href="'+play('popup')+'" target="_blank" rel="noopener">Scarica da Google Play</a></div><button type="button" class="appop-no">Non ora</button></div>';
+    var close=function(){set(KP);o.remove();document.removeEventListener('keydown',esc)};
+    var esc=function(e){if(e.key==='Escape')close()};
+    o.querySelector('.appop-x').onclick=close;o.querySelector('.appop-no').onclick=close;o.querySelector('.appop-b a').addEventListener('click',close);
+    o.addEventListener('click',function(e){if(e.target===o)close()});document.addEventListener('keydown',esc);
+    setTimeout(function(){document.body.appendChild(o);o.querySelector('.appop-b a').focus()},1200);
+    return}
+
+  /* 5. barretta in basso (dalla pagina dopo il popup; chiusa con × torna dopo 3 giorni) */
+  if(Date.now()-get(KB)<3*864e5)return;
+  var b=document.createElement('div');b.className='appbar';b.setAttribute('role','region');b.setAttribute('aria-label','Scarica l\'app');
+  b.innerHTML='<img src="assets/img/logo-gruppo.png" alt=""><p><b>App Farmacie Emistra</b>Gratis su Google Play</p>'+gp('barra','Scarica')+'<button type="button" class="appbar-x" aria-label="Chiudi">×</button>';
+  b.querySelector('.appbar-x').onclick=function(){set(KB);b.remove();document.body.classList.remove('has-appbar')};
+  document.body.appendChild(b);document.body.classList.add('has-appbar');
 })();

@@ -47,6 +47,6 @@ window.FR_GIORNATE = [
   var pag = document.getElementById('giornate-elenco');
   if (pag) {
     pag.innerHTML = prossime.length ? prossime.map(scheda).join('') :
-      '<div class="wrap"><p class="intro gt-vuoto">Al momento non ci sono giornate in programma. Torna a trovarci presto, oppure scarica l\'app <b>Farmacie Emistra</b> e attiva le notifiche "Giornate a tema e screening": ti avvisiamo appena ne organizziamo una.</p></div>';
+      '<div class="wrap"><p class="intro gt-vuoto">Al momento non ci sono giornate in programma. Torna a trovarci presto.</p></div>';
   }
 })();
