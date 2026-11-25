@@ -303,3 +303,5 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .gt-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.gt-btns .btn{width:auto}
 @media (max-width:720px){.giornata .gt{grid-template-columns:1fr}}
 .gt-btns .btnl{background:var(--brand);color:var(--brand-ink)}
+/* Offerte: mese mostrato in base alla data (classe mese-nov / mese-dic su <html>) */
+.mese-nov [data-mese="dic"],.mese-dic [data-mese="nov"]{display:none!important}
