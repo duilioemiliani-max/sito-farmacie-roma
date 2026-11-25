@@ -305,3 +305,6 @@ a.chip.logo:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .gt-btns .btnl{background:var(--brand);color:var(--brand-ink)}
 /* Offerte: mese mostrato in base alla data (classe mese-nov / mese-dic su <html>) */
 .mese-nov [data-mese="dic"],.mese-dic [data-mese="nov"]{display:none!important}
+.giornata .gt{border-color:var(--gc,var(--emiliani))}.giornata .gt-tag{background:var(--gc,var(--emiliani))}
+.giornata .gt:not(:has(.gt-img)){grid-template-columns:1fr}
+#giornate-elenco .giornata+.giornata,#giornate-home .giornata+.giornata{padding-top:0}
