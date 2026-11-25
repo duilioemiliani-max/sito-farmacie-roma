@@ -113,3 +113,8 @@ Dal lato di Google (lo fa il proprietario della scheda, dal profilo dell'attivit
 ### Voto Google di Emiliani nel sito
 Il voto e il numero di recensioni (4,8 e 69, dati di settembre 2026) si trovano in `assets/config.js`, nel blocco `FR_GOOGLE`.
 Compaiono nella Home, nella card di Emiliani (pagina Farmacie) e nel piè di pagina. Aggiornali ogni tanto guardando la scheda su Google.
+
+## Giornate a tema
+Le giornate a tema si inseriscono in `assets/giornate.js` (c'è un esempio da copiare in cima al file).
+Compaiono nella pagina **Giornate a tema** (`giornate.html`, nel menu) e in home finché non è passata la data; poi spariscono da sole.
+Se non ce ne sono, la pagina mostra un messaggio e la home non mostra niente.
