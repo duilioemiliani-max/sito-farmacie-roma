@@ -67,7 +67,7 @@
     document.querySelectorAll('input[name=df]').forEach(function(r){var k=SK[r.value.split('|')[1]],no=!!on&&on.indexOf(k)<0;r.disabled=no;if(!no&&!ok)ok=r;if(no&&r.checked)r.checked=false});
     if(on&&!document.querySelector('input[name=df]:checked')){ok.checked=true;ok.dispatchEvent(new Event('change',{bubbles:true}))}
     var dn2=$('donly');if(!dn2){dn2=document.createElement('p');dn2.id='donly';dn2.className='note donly';var so=d.querySelector('.opts.sede');so.parentNode.insertBefore(dn2,so.nextSibling)}
-    dn2.hidden=!on;dn2.textContent=on?'Questo servizio è disponibile solo presso la Farmacia '+on.map(function(k){for(var n in SK)if(SK[n]===k)return n}).join(' e ')+'.':'';
+    dn2.hidden=!on;dn2.textContent=on?'Questo servizio è disponibile solo presso '+(on.length>1?'le farmacie ':'la Farmacia ')+on.map(function(k){for(var n in SK)if(SK[n]===k)return n}).join(' e ')+'.':'';
     $('dt').textContent=cur.dataset.title;
     var dsc=cur.querySelector('h3+p');if($('ddesc'))$('ddesc').textContent=dsc?dsc.textContent:'';
     var book=cur.dataset.book==='1';
